@@ -1,4 +1,4 @@
-FISHEyE App
+FISHEyE Performance Metrics App
 ===
 
 
