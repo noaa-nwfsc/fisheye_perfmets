@@ -20,7 +20,7 @@ DatMain <- reactive({
 
 gdpMain <- reactive({
 
-    load("data/gdp_defl.RData")
+    gdp_defl <- readRDS("./data/gdp_defl.rds")
 
     return(gdp_defl)
 

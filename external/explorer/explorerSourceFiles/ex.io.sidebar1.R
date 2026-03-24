@@ -672,24 +672,6 @@ output$Yearselect <- renderUI({
 })
 
 output$deflYearselect <- renderUI({
-    defl_select <- selectInput(
-        "deflYearselect", "GDP Deflator Year:",
-        c(  "2024" = 2024,
-            "2023" = 2023,
-            "2022" = 2022,
-            "2021" = 2021,
-            "2020" = 2020,
-            "2019" = 2019
-        )
-    )
-    if (!is.null(input$Ind_sel)) {
-        if (input$Ind_sel %in% c("Labor", "Cost", "Impacts", "Economic")) {
-            defl_select
-        }
-    }
-})
-
-output$deflYearselect <- renderUI({
     
     defl_select <- selectInput("deflYearselect", "GDP Deflator Year:",
         c("2024" = 2024,
