@@ -3,7 +3,7 @@ dir("G:/Shared drives/NMFS NWC FRAM EDC CE (contains MSA Confidential Data)/FISH
 
 # Copy files over for Performance Metrics
 # Note from 6/25/2024 - I only copied over the CP data file
-perfmetricsdir <- "G:/Shared drives/NMFS NWC FRAM EDC CE (contains MSA Confidential Data)/FISHEyE/data/PerformanceMetrics/2026-03-24"
+perfmetricsdir <- "G:/Shared drives/NMFS NWC FRAM EDC CE (contains MSA Confidential Data)/FISHEyE/data/PerformanceMetrics/2026-03-31"
 #perfmetricsfiles <- list.files(perfmetricsdir)[grepl('RData', list.files(perfmetricsdir))]
 
 perfmetricsfiles <- list.files(perfmetricsdir)[grepl('perfmetrics.rds', list.files(perfmetricsdir))]
