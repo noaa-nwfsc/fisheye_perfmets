@@ -1,12 +1,13 @@
 library(here)
 # Display list of available date stamp folders for performance metrics
-dir(
-    "G:/Shared drives/NMFS NWC FRAM EDC CE (contains MSA Confidential Data)/FISHEyE/data/PerformanceMetrics"
+pm_dir <- file.path(
+    "G:", "Shared drives", "NMFS NWC FRAM EDC CE (contains MSA Confidential Data)", "FISHEyE", "data", "PerformanceMetrics"
 )
+dir(pm_dir)
 
 # Copy files over for Performance Metrics
 # Note from 6/25/2024 - I only copied over the CP data file
-perfmetricsdir <- "G:/Shared drives/NMFS NWC FRAM EDC CE (contains MSA Confidential Data)/FISHEyE/data/PerformanceMetrics/2025-12-03"
+perfmetricsdir <- file.path(pm_dir, "2026-04-06")
 #perfmetricsfiles <- list.files(perfmetricsdir)[grepl('RData', list.files(perfmetricsdir))]
 
 perfmetricsfiles <- list.files(perfmetricsdir)[grepl(
