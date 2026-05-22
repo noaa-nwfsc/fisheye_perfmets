@@ -151,7 +151,7 @@ csselections <- reactive({
 
 defladj <- reactive({
     gdp <- gdpMain()
-    gdp$YEAR <- as.character(gdp$YEAR)
+    gdp$YEAR <- gdp$YEAR
     gdp$DEFL <- gdp$DEFL / gdp$DEFL[gdp$YEAR == input$deflYearselect]
 
     return(gdp)

@@ -284,8 +284,7 @@ doPlot <- function(dat, x, y) {
 
         # confidentiality messages ####
         supp_obs <- function() {
-            "\n
-  \nData have been suppressed for years that are not plotted as there are not enough observations to protect confidentiality. \nPlease see the About tab for more information."
+            "\nData have been suppressed for years that are not plotted as there are not enough observations to protect confidentiality. \nPlease see the About tab for more information."
         }
 
         # x-axis label ####
@@ -414,7 +413,7 @@ doPlot <- function(dat, x, y) {
         # geom_rect (define the grey boxes for pre-catch shares) ####
         geom_rect_fun <- function(ymin_val = -Inf, ymax_val = Inf) {
             geom_vline(
-                xintercept = table(yr() <= 2010)[[2]] + .5,
+                xintercept = 2010.5,
                 linewidth = 1.1,
                 color = "darkgray"
             )
@@ -542,9 +541,14 @@ doPlot <- function(dat, x, y) {
                 #
                 # plot.title = element_text(, vjust = 1),
                 panel.background = element_rect(fill = "white"),
-                #      panel.spacing = unit(c(0.5, 0.5, 1, 0.5), "cm"),
-                panel.grid.minor = element_line(linetype = "blank"),
-                panel.grid.major.x = element_line(linetype = "blank"),
+                panel.grid.minor.x = element_line(
+                    color = "#E5E5E5",
+                    linewidth = 0.5
+                ),
+                panel.grid.major.x = element_line(
+                    color = "#E5E5E5",
+                    linewidth = 0.5
+                ),
                 panel.grid.major.y = element_line(
                     color = "#656C70",
                     linetype = "dotted"
@@ -556,7 +560,7 @@ doPlot <- function(dat, x, y) {
                     vjust = 1
                 ),
                 strip.background = element_rect(fill = "lightgrey"),
-                axis.ticks = element_blank(),
+                # axis.ticks = element_blank(),
                 axis.title.x = element_text(
                     size = rel(1.4),
                     hjust = 0,
@@ -584,6 +588,12 @@ doPlot <- function(dat, x, y) {
                     size = 15
                 ),
                 legend.title = element_blank()
+            ) +
+            scale_x_continuous(
+                breaks = scales::pretty_breaks(),
+                minor_breaks = function(x) {
+                    seq(floor(min(x)), ceiling(max(x)), by = 1)
+                }
             )
 
         print(g)

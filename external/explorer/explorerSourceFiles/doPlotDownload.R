@@ -315,8 +315,7 @@ doPlotDownload <- function(dat, x, y) {
         }
         # confidentiality messages ####
         supp_obs <- function() {
-            "\n
-  \nData have been suppressed for years that are not plotted as there are not enough observations to protect confidentiality. \nPlease see the About tab for more information."
+            "\nData have been suppressed for years that are not plotted as there are not enough observations to protect confidentiality. \nPlease see the About tab for more information."
         }
 
         # x-axis label ####
