@@ -377,7 +377,8 @@ doPlotDownload <- function(dat, x, y) {
                         y = .data[[y]],
                         group = .data[[groupVar]]
                     ),
-                    environment = environment()
+                    environment = environment() +
+                        coord_cartesian(xlim = c(NA, max(2025, currentyear)))
                 )
                 # otherwise normal plot:
             } else {

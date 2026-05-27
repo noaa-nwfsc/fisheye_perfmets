@@ -1,4 +1,4 @@
-doPlot <- function(dat, x, y) {
+doPlot <- function(dat, x, y, currentyear) {
     if (PermitPlot()) {
         #removeNAs
         #dat <- subset(dat, is.na(dat$VALUE) == FALSE)
@@ -591,10 +591,12 @@ doPlot <- function(dat, x, y) {
             ) +
             scale_x_continuous(
                 breaks = scales::pretty_breaks(),
+                limits = c(NA, max(currentyear, 2025)),
                 minor_breaks = function(x) {
                     seq(floor(min(x)), ceiling(max(x)), by = 1)
                 }
-            )
+            ) +
+            scale_y_continuous(expand = expansion(mult = c(0, 0.05)))
 
         print(g)
     } else {

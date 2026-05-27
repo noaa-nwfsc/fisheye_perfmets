@@ -159,7 +159,12 @@ output$PlotMain <- renderPlot(
             )
         ))
         # browser()
-        doPlot(dat = DatSub(), x = "YEAR", y = "VALUE")
+        doPlot(
+            dat = DatSub(),
+            x = "YEAR",
+            y = "VALUE",
+            currentyear = max(DatVars()$YEAR)
+        )
     },
     height = scale_height,
     width = "auto"
@@ -181,9 +186,19 @@ output$PlotMain2 <- renderPlot(
                 'The selected statistic is not calculated for this metric. Please try switching to Total.'
             )
         ))
-        doPlot(dat = DatSub(), x = "YEAR", y = "VALUE")
+        doPlot(
+            dat = DatSub(),
+            x = "YEAR",
+            y = "VALUE",
+            currentyear = max(DatVars()$YEAR)
+        )
         input$data
-        doPlot(dat = DatSub(), x = "YEAR", y = "VALUE")
+        doPlot(
+            dat = DatSub(),
+            x = "YEAR",
+            y = "VALUE",
+            currentyear = max(DatVars()$YEAR)
+        )
     },
     height = 400,
     width = 700
@@ -205,9 +220,19 @@ output$PlotMain3 <- renderPlot(
                 'The selected statistic is not calculated for this metric. Please try switching to Total.'
             )
         ))
-        doPlot(dat = DatSub(), x = "YEAR", y = "VALUE")
+        doPlot(
+            dat = DatSub(),
+            x = "YEAR",
+            y = "VALUE",
+            currentyear = max(DatVars()$YEAR)
+        )
         input$data
-        doPlot(dat = DatSub(), x = "YEAR", y = "VALUE")
+        doPlot(
+            dat = DatSub(),
+            x = "YEAR",
+            y = "VALUE",
+            currentyear = max(DatVars()$YEAR)
+        )
     },
     height = 400,
     width = 700

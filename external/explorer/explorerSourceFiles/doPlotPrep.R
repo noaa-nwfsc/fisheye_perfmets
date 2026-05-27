@@ -229,7 +229,8 @@ doPlotPrep <- reactive({
         g <- ggplot(
             dat4plot,
             aes(x = .data[[x]], y = .data[[y]], group = groupVar),
-            environment = environment()
+            environment = environment() +
+                coord_cartesian(xlim = c(NA, max(2025, currentyear)))
         )
 
         # PLOT: add lines and points to the plot ####
