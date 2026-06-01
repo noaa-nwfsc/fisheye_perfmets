@@ -117,7 +117,7 @@ output$demSelect <- renderUI({
                     "demSelect",
                     NULL,
                     choiceNames = lapply(dem_cpms$metric_link, HTML),
-                    choiceValues = demhtml_cpms$metric_value,
+                    choiceValues = dem_cpms$metric_value,
                     selected = "Number of vessels"
                 )
             )
@@ -165,6 +165,9 @@ output$demSelect <- renderUI({
 # (doesn't need all of the customization as characteristics because all of the metrics have the same characteristics)
 # We added offloading revenue and custom processing revenue for FR so the metrics and layout will be different
 output$econSelect <- renderUI({
+    # if (input$Sect_sel == 'CP' & any(grepl('ariable', DatSub()$METRIC))) {
+    #     browser()
+    # }
     if (input$LayoutSelect) {
         if (input$Sect_sel == "FR") {
             tags$div(
