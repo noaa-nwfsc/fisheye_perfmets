@@ -7,23 +7,41 @@
 output$metrics <- renderUI({
     if (input$Sect_sel == "FR") {
         tabsetPanel(
-            tabPanel("Processor characteristics", uiOutput("demSelect"), uiOutput("demStats")),
+            tabPanel(
+                "Processor characteristics",
+                uiOutput("demSelect"),
+                uiOutput("demStats")
+            ),
             tabPanel("Economic", uiOutput("econSelect"), uiOutput("econStats")),
             tabPanel("Labor", uiOutput("crewSelect"), uiOutput("crewStats")),
             tabPanel("Cost", uiOutput("costSelect"), uiOutput("costStats")),
-            tabPanel("Impacts", uiOutput("impactSelect"), uiOutput("impactStats")),
+            tabPanel(
+                "Impacts",
+                uiOutput("impactSelect"),
+                uiOutput("impactStats")
+            ),
             tabPanel("Other", uiOutput("otherSelect"), uiOutput("otherStats")),
-            id = "Ind_sel", type = c("tabs")
+            id = "Ind_sel",
+            type = c("tabs")
         )
     } else {
         tabsetPanel(
-            tabPanel("Vessel characteristics", uiOutput("demSelect"), uiOutput("demStats")),
+            tabPanel(
+                "Vessel characteristics",
+                uiOutput("demSelect"),
+                uiOutput("demStats")
+            ),
             tabPanel("Economic", uiOutput("econSelect"), uiOutput("econStats")),
             tabPanel("Labor", uiOutput("crewSelect"), uiOutput("crewStats")),
             tabPanel("Cost", uiOutput("costSelect"), uiOutput("costStats")),
-            tabPanel("Impacts", uiOutput("impactSelect"), uiOutput("impactStats")),
+            tabPanel(
+                "Impacts",
+                uiOutput("impactSelect"),
+                uiOutput("impactStats")
+            ),
             tabPanel("Other", uiOutput("otherSelect"), uiOutput("otherStats")),
-            id = "Ind_sel", type = c("tabs")
+            id = "Ind_sel",
+            type = c("tabs")
         )
     }
 })
@@ -35,7 +53,6 @@ output$metrics <- renderUI({
 # Based on the layout, the sector, and whether demStats is total, determine the checkbox type and which value is selected
 # Characteristics tab: checkbox/radiobutton set up ####
 
-
 # Adding list of hyperlinks for sidebar components to be used in the sidebar selectors#####
 source("external/explorer/explorerSourceFiles/metric_names/metric_names.R")
 
@@ -45,7 +62,9 @@ output$impactSelect <- renderUI({
     if (input$LayoutSelect) {
         tags$div(
             class = "ckbox",
-            checkboxGroupInput("impactSelect", NULL,
+            checkboxGroupInput(
+                "impactSelect",
+                NULL,
                 choiceNames = lapply(impacts$metric_link, HTML),
                 choiceValues = impacts$metric_value,
                 selected = "Income impacts"
@@ -54,7 +73,9 @@ output$impactSelect <- renderUI({
     } else {
         tags$div(
             class = "ckbox",
-            radioButtons("impactSelect", NULL,
+            radioButtons(
+                "impactSelect",
+                NULL,
                 choiceNames = lapply(impacts$metric_link, HTML),
                 choiceValues = impacts$metric_value,
                 selected = "Income impacts"
@@ -70,7 +91,9 @@ output$demSelect <- renderUI({
         if (input$Sect_sel == "FR") {
             tags$div(
                 class = "ckbox",
-                checkboxGroupInput("demSelect", NULL,
+                checkboxGroupInput(
+                    "demSelect",
+                    NULL,
                     choiceNames = lapply(dem_fr$metric_link, HTML),
                     choiceValues = dem_fr$metric_value,
                     selected = "Number of processors"
@@ -79,7 +102,9 @@ output$demSelect <- renderUI({
         } else if (input$Sect_sel == "CV") {
             tags$div(
                 class = "ckbox",
-                checkboxGroupInput("demSelect", NULL,
+                checkboxGroupInput(
+                    "demSelect",
+                    NULL,
                     choiceNames = lapply(dem_cv$metric_link, HTML),
                     choiceValues = dem_cv$metric_value,
                     selected = "Number of vessels"
@@ -88,9 +113,11 @@ output$demSelect <- renderUI({
         } else {
             tags$div(
                 class = "ckbox",
-                checkboxGroupInput("demSelect", NULL,
+                checkboxGroupInput(
+                    "demSelect",
+                    NULL,
                     choiceNames = lapply(dem_cpms$metric_link, HTML),
-                    choiceValues = demhtml_cpms$metric_value,
+                    choiceValues = dem_cpms$metric_value,
                     selected = "Number of vessels"
                 )
             )
@@ -100,7 +127,9 @@ output$demSelect <- renderUI({
         if (input$Sect_sel == "FR") {
             tags$div(
                 class = "ckbox",
-                radioButtons("demSelect", NULL,
+                radioButtons(
+                    "demSelect",
+                    NULL,
                     choiceNames = lapply(dem_fr$metric_link, HTML),
                     choiceValues = dem_fr$metric_value,
                     selected = "Number of processors"
@@ -109,7 +138,9 @@ output$demSelect <- renderUI({
         } else if (input$Sect_sel == "CV") {
             tags$div(
                 class = "ckbox",
-                radioButtons("demSelect", NULL,
+                radioButtons(
+                    "demSelect",
+                    NULL,
                     choiceNames = lapply(dem_cv$metric_link, HTML),
                     choiceValues = dem_cv$metric_value,
                     selected = "Number of vessels"
@@ -118,7 +149,9 @@ output$demSelect <- renderUI({
         } else {
             tags$div(
                 class = "ckbox",
-                radioButtons("demSelect", NULL,
+                radioButtons(
+                    "demSelect",
+                    NULL,
                     choiceNames = lapply(dem_cpms$metric_link, HTML),
                     choiceValues = dem_cpms$metric_value,
                     selected = "Number of vessels"
@@ -132,11 +165,16 @@ output$demSelect <- renderUI({
 # (doesn't need all of the customization as characteristics because all of the metrics have the same characteristics)
 # We added offloading revenue and custom processing revenue for FR so the metrics and layout will be different
 output$econSelect <- renderUI({
+    # if (input$Sect_sel == 'CP' & any(grepl('ariable', DatSub()$METRIC))) {
+    #     browser()
+    # }
     if (input$LayoutSelect) {
         if (input$Sect_sel == "FR") {
             tags$div(
                 class = "econfr",
-                checkboxGroupInput("econSelect", NULL,
+                checkboxGroupInput(
+                    "econSelect",
+                    NULL,
                     choiceNames = lapply(econ_fr$metric_link, HTML),
                     choiceValues = econ_fr$metric_value,
                     selected = "Revenue"
@@ -145,7 +183,9 @@ output$econSelect <- renderUI({
         } else {
             tags$div(
                 class = "ckbox",
-                checkboxGroupInput("econSelect", NULL,
+                checkboxGroupInput(
+                    "econSelect",
+                    NULL,
                     choiceNames = lapply(econ$metric_link, HTML),
                     choiceValues = econ$metric_value,
                     selected = "Revenue"
@@ -156,7 +196,9 @@ output$econSelect <- renderUI({
         if (input$Sect_sel == "FR") {
             tags$div(
                 class = "econfr",
-                radioButtons("econSelect", NULL,
+                radioButtons(
+                    "econSelect",
+                    NULL,
                     choiceNames = lapply(econ_fr$metric_link, HTML),
                     choiceValues = econ_fr$metric_value,
                     selected = "Revenue"
@@ -165,7 +207,9 @@ output$econSelect <- renderUI({
         } else {
             tags$div(
                 class = "ckbox",
-                radioButtons("econSelect", NULL,
+                radioButtons(
+                    "econSelect",
+                    NULL,
                     choiceNames = lapply(econ$metric_link, HTML),
                     choiceValues = econ$metric_value,
                     selected = "Revenue"
@@ -205,7 +249,9 @@ output$crewSelect <- renderUI({
                 selectinputcptcrew,
                 tags$div(
                     class = "ckbox",
-                    checkboxGroupInput("crewSelect", NULL,
+                    checkboxGroupInput(
+                        "crewSelect",
+                        NULL,
                         choiceNames = lappy(labor_cv_crew$metric_link, HTML),
                         choiceValues = labor_cv_crew$metric_value,
                         selected = "Number of crew"
@@ -217,7 +263,9 @@ output$crewSelect <- renderUI({
                 selectinputprnprcrew,
                 tags$div(
                     class = "ckbox",
-                    checkboxGroupInput("crewSelect", NULL,
+                    checkboxGroupInput(
+                        "crewSelect",
+                        NULL,
                         choiceNames = lapply(labor_cpms_proc$metric_link, HTML),
                         choiceValues = labor_cpms_proc$metric_value,
                         selected = "Number of processing crew"
@@ -229,7 +277,9 @@ output$crewSelect <- renderUI({
                 selectinputprdnonprod,
                 tags$div(
                     class = "ckbox",
-                    checkboxGroupInput("crewSelect", NULL,
+                    checkboxGroupInput(
+                        "crewSelect",
+                        NULL,
                         choiceNames = lapply(labor_fr_prod$metric_link, HTML),
                         choiceValues = labor_fr_prod$metric_value,
                         selected = "Average monthly number of production employees"
@@ -243,7 +293,9 @@ output$crewSelect <- renderUI({
                 selectinputcptcrew,
                 tags$div(
                     class = "ckbox",
-                    radioButtons("crewSelect", NULL,
+                    radioButtons(
+                        "crewSelect",
+                        NULL,
                         choiceNames = lapply(labor_cv_crew$metric_link, HTML),
                         choiceValues = labor_cv_crew$metric_value,
                         selected = "Number of crew"
@@ -255,7 +307,9 @@ output$crewSelect <- renderUI({
                 selectinputprnprcrew,
                 tags$div(
                     class = "ckbox",
-                    radioButtons("crewSelect", NULL,
+                    radioButtons(
+                        "crewSelect",
+                        NULL,
                         choiceNames = lapply(labor_cpms_proc$metric_link, HTML),
                         choiceValues = labor_cpms_proc$metric_value,
                         selected = "Number of processing crew"
@@ -267,7 +321,9 @@ output$crewSelect <- renderUI({
                 selectinputprdnonprod,
                 tags$div(
                     class = "ckbox",
-                    radioButtons("crewSelect", NULL,
+                    radioButtons(
+                        "crewSelect",
+                        NULL,
                         choiceNames = lapply(labor_fr_prod$metric_link, HTML),
                         choiceValues = labor_fr_prod$metric_value,
                         selected = "Average monthly number of production employees"
@@ -289,7 +345,9 @@ output$costSelect <- renderUI({
         if (input$Sect_sel == "CV") {
             tags$div(
                 class = class4costs,
-                checkboxGroupInput("costSelect", "Cost categories:",
+                checkboxGroupInput(
+                    "costSelect",
+                    "Cost categories:",
                     choiceNames = lapply(costs_cv$metric_link, HTML),
                     choiceValues = costs_cv$metric_value,
                     selected = c("All fixed costs", "All variable costs")
@@ -298,7 +356,9 @@ output$costSelect <- renderUI({
         } else if (input$Sect_sel == "FR") {
             tags$div(
                 class = class4costs,
-                checkboxGroupInput("costSelect", "Cost categories:",
+                checkboxGroupInput(
+                    "costSelect",
+                    "Cost categories:",
                     choiceNames = lapply(costs_fr$metric_link, HTML),
                     choiceValues = costs_fr$metric_value,
                     selected = c("All fixed costs", "All variable costs")
@@ -307,7 +367,9 @@ output$costSelect <- renderUI({
         } else if (input$Sect_sel == "CP") {
             tags$div(
                 class = class4costs,
-                checkboxGroupInput("costSelect", "Cost categories:",
+                checkboxGroupInput(
+                    "costSelect",
+                    "Cost categories:",
                     choiceNames = lapply(costs_cp$metric_link, HTML),
                     choiceValues = costs_cp$metric_value,
                     selected = c("All fixed costs", "All variable costs")
@@ -316,7 +378,9 @@ output$costSelect <- renderUI({
         } else {
             tags$div(
                 class = class4costs,
-                checkboxGroupInput("costSelect", "Cost categories:",
+                checkboxGroupInput(
+                    "costSelect",
+                    "Cost categories:",
                     choiceNames = lapply(costs_ms$metric_link, HTML),
                     choiceValues = costs_ms$metric_value,
                     selected = c("All fixed costs", "All variable costs")
@@ -326,7 +390,9 @@ output$costSelect <- renderUI({
     } else if (input$Sect_sel == "CV") {
         tags$div(
             class = class4costs,
-            radioButtons("costSelect", "Cost categories:",
+            radioButtons(
+                "costSelect",
+                "Cost categories:",
                 choiceNames = lapply(costs_cv$metric_link, HTML),
                 choiceValues = costs_cv$metric_value,
                 selected = c("All variable costs")
@@ -335,7 +401,9 @@ output$costSelect <- renderUI({
     } else if (input$Sect_sel == "FR") {
         tags$div(
             class = class4costs,
-            radioButtons("costSelect", "Cost categories:",
+            radioButtons(
+                "costSelect",
+                "Cost categories:",
                 choiceNames = lapply(costs_fr$metric_link, HTML),
                 choiceValues = costs_fr$metric_value,
                 selected = c("All variable costs")
@@ -344,7 +412,9 @@ output$costSelect <- renderUI({
     } else if (input$Sect_sel == "CP") {
         tags$div(
             class = class4costs,
-            radioButtons("costSelect", "Cost categories:",
+            radioButtons(
+                "costSelect",
+                "Cost categories:",
                 choiceNames = lapply(costs_cp$metric_link, HTML),
                 choiceValues = costs_cp$metric_value,
                 selected = c("All variable costs")
@@ -353,7 +423,9 @@ output$costSelect <- renderUI({
     } else {
         tags$div(
             class = class4costs,
-            radioButtons("costSelect", "Cost categories:",
+            radioButtons(
+                "costSelect",
+                "Cost categories:",
                 choiceNames = lapply(costs_ms$metric_link, HTML),
                 choiceValues = costs_ms$metric_value,
                 selected = c("All variable costs")
@@ -370,7 +442,9 @@ output$otherSelect <- renderUI({
         if (input$Sect_sel == "CV") {
             tags$div(
                 class = "ckbox",
-                checkboxGroupInput("otherSelect", NULL,
+                checkboxGroupInput(
+                    "otherSelect",
+                    NULL,
                     choiceNames = lapply(other_cv_layout$metric_link, HTML),
                     choiceValues = other_cv_layout$metric_value,
                     selected = "Days at sea"
@@ -379,7 +453,9 @@ output$otherSelect <- renderUI({
         } else if (input$Sect_sel == "CP") {
             tags$div(
                 class = "ckbox",
-                checkboxGroupInput("otherSelect", NULL,
+                checkboxGroupInput(
+                    "otherSelect",
+                    NULL,
                     choiceNames = lapply(other_cp_layout$metric_link, HTML),
                     choiceValues = other_cp_layout$metric_value,
                     selected = "Days fishing, processing, and steaming on the WC"
@@ -388,7 +464,9 @@ output$otherSelect <- renderUI({
         } else if (input$Sect_sel == "FR") {
             tags$div(
                 class = "ckbox",
-                checkboxGroupInput("otherSelect", NULL,
+                checkboxGroupInput(
+                    "otherSelect",
+                    NULL,
                     choiceNames = lapply(other_fr$metric_link, HTML),
                     choiceValues = other_fr$metric_value,
                     selected = "Gini coefficient"
@@ -397,7 +475,9 @@ output$otherSelect <- renderUI({
         } else {
             tags$div(
                 class = "ckbox",
-                checkboxGroupInput("otherSelect", NULL,
+                checkboxGroupInput(
+                    "otherSelect",
+                    NULL,
                     choiceNames = lapply(other_ms_layout$metric_link, HTML),
                     choiceValues = other_ms_layout$metric_value,
                     selected = "Days fishing, processing, and steaming on the WC"
@@ -408,7 +488,9 @@ output$otherSelect <- renderUI({
     } else if (input$Sect_sel == "CV") {
         tags$div(
             class = "ckbox",
-            radioButtons("otherSelect", NULL,
+            radioButtons(
+                "otherSelect",
+                NULL,
                 choiceNames = lapply(other_cv$metric_link, HTML),
                 choiceValues = other_cv$metric_value,
                 selected = "Days at sea"
@@ -417,7 +499,9 @@ output$otherSelect <- renderUI({
     } else if (input$Sect_sel == "CP") {
         tags$div(
             class = "ckbox",
-            radioButtons("otherSelect", NULL,
+            radioButtons(
+                "otherSelect",
+                NULL,
                 choiceNames = lapply(other_cp$metric_link, HTML),
                 choiceValues = other_cp$metric_value,
                 selected = "Days fishing, processing, and steaming on the WC"
@@ -426,7 +510,9 @@ output$otherSelect <- renderUI({
     } else if (input$Sect_sel == "FR") {
         tags$div(
             class = "ckbox",
-            radioButtons("otherSelect", NULL,
+            radioButtons(
+                "otherSelect",
+                NULL,
                 choiceNames = lapply(other_fr$metric_link, HTML),
                 choiceValues = other_fr$metric_value,
                 selected = "Gini coefficient"
@@ -435,7 +521,9 @@ output$otherSelect <- renderUI({
     } else {
         tags$div(
             class = "ckbox",
-            radioButtons("otherSelect", NULL,
+            radioButtons(
+                "otherSelect",
+                NULL,
                 choiceNames = lapply(other_ms$metric_link, HTML),
                 choiceValues = other_ms$metric_value,
                 selected = "Days fishing, processing, and steaming on the WC"
@@ -446,8 +534,11 @@ output$otherSelect <- renderUI({
 
 # SET UP THE STATISTIC RADIOBUTTONS FOR EACH TAB ####
 radiobuttonstatistic <- function(inputID, selection = "Median") {
-    radioButtons(inputID,
-        HTML("<div> Statistic: <button id='istat' type='button' class='btn btn-default action-button shiny-bound-input'> <i class='fa fa-info-circle fa-fw' ></i></button> </div>"),
+    radioButtons(
+        inputID,
+        HTML(
+            "<div> Statistic: <button id='istat' type='button' class='btn btn-default action-button shiny-bound-input'> <i class='fa fa-info-circle fa-fw' ></i></button> </div>"
+        ),
         choices = c("Mean", "Median", "Total"),
         select = selection
     )
@@ -458,8 +549,11 @@ radiobuttonstatistic <- function(inputID, selection = "Median") {
 # STATISTIC BUTTON FOR IMPACTS, only show total
 output$impactStats <- renderUI({
     tagList(
-        radioButtons("impactStats",
-            HTML("<div> Statistic: <button id='istatimpacts' type='button' class='btn btn-default action-button shiny-bound-input'> <i class='fa fa-info-circle fa-fw' ></i></button> </div>"),
+        radioButtons(
+            "impactStats",
+            HTML(
+                "<div> Statistic: <button id='istatimpacts' type='button' class='btn btn-default action-button shiny-bound-input'> <i class='fa fa-info-circle fa-fw' ></i></button> </div>"
+            ),
             choices = "Total",
             select = "Total"
         )
@@ -474,7 +568,8 @@ output$demStats <- renderUI({
 output$econStats <- renderUI({
     if (input$Sect_sel == "FR") {
         tagList(
-            selectInput("AVE_MED",
+            selectInput(
+                "AVE_MED",
                 HTML(
                     "<div> Statistic: <button id='istat' type='button' class='btn btn-default action-button shiny-bound-input'> <i class='fa fa-info-circle fa-fw' ></i></button> </div>"
                 ),
@@ -489,7 +584,8 @@ output$econStats <- renderUI({
         )
     } else if (input$Sect_sel == "M" || input$Sect_sel == "CP") {
         tagList(
-            selectInput("AVE_MED",
+            selectInput(
+                "AVE_MED",
                 HTML(
                     "<div> Statistic: <button id='istat' type='button' class='btn btn-default action-button shiny-bound-input'> <i class='fa fa-info-circle fa-fw' ></i></button> </div>"
                 ),
@@ -499,12 +595,18 @@ output$econStats <- renderUI({
             ),
             tags$div(
                 class = "statbox",
-                radioButtons("econStats", "", choices = c(DatVars()$STAT[6:9]), selected = DatVars()$STAT[6])
+                radioButtons(
+                    "econStats",
+                    "",
+                    choices = c(DatVars()$STAT[6:9]),
+                    selected = DatVars()$STAT[6]
+                )
             )
         )
     } else {
         tagList(
-            selectInput("AVE_MED",
+            selectInput(
+                "AVE_MED",
                 HTML(
                     "<div> Statistic: <button id='istat' type='button' class='btn btn-default action-button shiny-bound-input'> <i class='fa fa-info-circle fa-fw' ></i></button> </div>"
                 ),
@@ -514,7 +616,12 @@ output$econStats <- renderUI({
             ),
             tags$div(
                 class = "statbox",
-                radioButtons("econStats", "", choices = c(DatVars()$STAT[5:7]), selected = DatVars()$STAT[7])
+                radioButtons(
+                    "econStats",
+                    "",
+                    choices = c(DatVars()$STAT[5:7]),
+                    selected = DatVars()$STAT[7]
+                )
             )
         )
     }
@@ -527,8 +634,10 @@ output$crewStats <- renderUI({
 
 selectinputavemedcosts <- selectInput(
     inputId = "AVE_MED_COSTS",
-    HTML("<div> Statistic: <button id='istat' type='button' class='btn btn-default action-button shiny-bound-input'>
-                                        <i class='fa fa-info-circle fa-fw' ></i></button> </div>"),
+    HTML(
+        "<div> Statistic: <button id='istat' type='button' class='btn btn-default action-button shiny-bound-input'>
+                                        <i class='fa fa-info-circle fa-fw' ></i></button> </div>"
+    ),
     c(Mean = "A", Median = "M", Total = "T"),
     selectize = F,
     selected = "M"
@@ -539,14 +648,22 @@ output$costStats <- renderUI({
     if (input$Sect_sel == "FR") {
         tagList(
             selectinputavemedcosts,
-            tags$div(class = "statbox", radioButtons("costStats", "", choices = DatVars()$STAT[4:6]))
+            tags$div(
+                class = "statbox",
+                radioButtons("costStats", "", choices = DatVars()$STAT[4:6])
+            )
         )
     } else if (input$Sect_sel == "CP" || input$Sect_sel == "M") {
         tagList(
             selectinputavemedcosts,
             tags$div(
                 class = "statbox",
-                radioButtons("costStats", "", choices = c(DatVars()$STAT[6:10]), selected = DatVars()$STAT[6])
+                radioButtons(
+                    "costStats",
+                    "",
+                    choices = c(DatVars()$STAT[6:10]),
+                    selected = DatVars()$STAT[6]
+                )
             )
         )
     } else {
@@ -554,7 +671,12 @@ output$costStats <- renderUI({
             selectinputavemedcosts,
             tags$div(
                 class = "statbox",
-                radioButtons("costStats", "", choices = c(DatVars()$STAT[5:8]), selected = DatVars()$STAT[5])
+                radioButtons(
+                    "costStats",
+                    "",
+                    choices = c(DatVars()$STAT[5:8]),
+                    selected = DatVars()$STAT[5]
+                )
             )
         )
     }
@@ -564,11 +686,14 @@ output$costStats <- renderUI({
 output$otherStats <- renderUI({
     if (input$LayoutSelect) {
         tagList(radiobuttonstatistic(inputID = "otherStats"))
-    } else if (input$otherSelect %in% c(
-        "Share of landings by state",
-        "Seasonality",
-        "Gini coefficient"
-    )) {
+    } else if (
+        input$otherSelect %in%
+            c(
+                "Share of landings by state",
+                "Seasonality",
+                "Gini coefficient"
+            )
+    ) {
         tags$div(
             class = "nostat",
             radioButtons("otherStats", "", choices = ""),
@@ -586,14 +711,22 @@ htmlindicatorselect <- HTML(
 )
 output$IndicatorSelect <- renderUI({
     if (input$Sect_sel != "FR") {
-        selectInput("Ind_sel",
+        selectInput(
+            "Ind_sel",
             htmlindicatorselect,
-            c("Vessel characteristics", "Economic", "Labor", "Impacts", "Other"),
+            c(
+                "Vessel characteristics",
+                "Economic",
+                "Labor",
+                "Impacts",
+                "Other"
+            ),
             selected = "Vessel characteristics",
             selectize = T
         )
     } else {
-        selectInput("Ind_sel",
+        selectInput(
+            "Ind_sel",
             htmlindicatorselect,
             c("Processor characteristics", "Economic", "Labor", "Other"),
             selected = "Vessel characteristics",
@@ -605,7 +738,6 @@ output$IndicatorSelect <- renderUI({
 })
 
 # YEAR slider bar ####
-
 
 output$Yearselect <- renderUI({
     # create 2 slider bars, one with 2004-current and the other 2009-current
@@ -637,52 +769,70 @@ output$Yearselect <- renderUI({
         )
     )
 
-
     # choose which slider bar to display
     if (is.null(input$Ind_sel) || is.null(input$CategorySelect)) {
         tagsdiv2009
-    } else if (input$Ind_sel == "Vessel characteristics" ||
-        input$Ind_sel == "Processor characteristics") {
-        if (input$Sect_sel == "CV" &
-            input$CategorySelect == "Fisheries" &
-            any(input$demSelect %in% c("Number of vessels", "Vessel length"))) {
+    } else if (
+        input$Ind_sel == "Vessel characteristics" ||
+            input$Ind_sel == "Processor characteristics"
+    ) {
+        if (
+            input$Sect_sel == "CV" &
+                input$CategorySelect == "Fisheries" &
+                any(
+                    input$demSelect %in% c("Number of vessels", "Vessel length")
+                )
+        ) {
             tagsdiv2004
         } else {
             tagsdiv2009
         }
     } else if (input$Ind_sel == "Other") {
-        if (input$Sect_sel == "CV" &
-            input$CategorySelect == "Fisheries" &
-            input$otherSelect %in% c("Seasonality", "Share of landings by state", "Gini coefficient", "Landed weight", "Trips")) {
+        if (
+            input$Sect_sel == "CV" &
+                input$CategorySelect == "Fisheries" &
+                input$otherSelect %in%
+                    c(
+                        "Seasonality",
+                        "Share of landings by state",
+                        "Gini coefficient",
+                        "Landed weight",
+                        "Trips"
+                    )
+        ) {
             tagsdiv2004
         } else {
             tagsdiv2009
         }
     } else if (input$Ind_sel == "Economic") {
-        if (input$Sect_sel == "CV" &
-            input$CategorySelect == "Fisheries" &
-            input$econSelect[1] %in% "Revenue") {
+        if (
+            input$Sect_sel == "CV" &
+                input$CategorySelect == "Fisheries" &
+                input$econSelect[1] %in% "Revenue"
+        ) {
             tagsdiv2004
         } else {
             tagsdiv2009
         }
-    } else if (input$Ind_sel == "Labor" || input$Ind_sel == "Cost" || input$Ind_sel == "Impacts") {
+    } else if (
+        input$Ind_sel == "Labor" ||
+            input$Ind_sel == "Cost" ||
+            input$Ind_sel == "Impacts"
+    ) {
         tagsdiv2009
     }
 })
 
 output$deflYearselect <- renderUI({
-    
-    defl_select <- selectInput("deflYearselect", "GDP Deflator Year:",
-        c("2024" = 2024,
-        "2023" = 2023, 
-          "2022" = 2022))
-    
-     if (input$Ind_sel %in% c('Labor', 'Cost', 'Impacts', 'Economic')) {
+    defl_select <- selectInput(
+        "deflYearselect",
+        "GDP Deflator Year:",
+        c("2024" = 2024, "2023" = 2023, "2022" = 2022)
+    )
+
+    if (input$Ind_sel %in% c('Labor', 'Cost', 'Impacts', 'Economic')) {
         defl_select
     }
-    
-    
 })
 
 fish.var <- c(
@@ -739,7 +889,7 @@ prod4cats <- c(
 # vessel size
 vsssize <- c(
     "Large vessel (> 80 ft)",
-    "Medium vessel (> 60ft, <= 80ft)",
+    "Medium vessel (> 60 ft, <= 80 ft)",
     "Small vessel (<= 60 ft)"
 )
 
@@ -768,12 +918,22 @@ output$Categoryselect <- renderUI({
     if (input$Sect_sel != "FR") {
         tags$div(
             class = "ckbox",
-            radioButtons("CategorySelect", "Group vessels according to:", choices = DatVars()$CATEGORY, selected = DatVars()$CATEGORY[1])
+            radioButtons(
+                "CategorySelect",
+                "Group vessels according to:",
+                choices = DatVars()$CATEGORY,
+                selected = DatVars()$CATEGORY[1]
+            )
         )
     } else {
         tags$div(
             class = "ckbox",
-            radioButtons("CategorySelect", "Group processors according to:", choices = DatVars()$CATEGORY, selected = DatVars()$CATEGORY[1])
+            radioButtons(
+                "CategorySelect",
+                "Group processors according to:",
+                choices = DatVars()$CATEGORY,
+                selected = DatVars()$CATEGORY[1]
+            )
         )
     }
 })
@@ -781,11 +941,17 @@ output$Categoryselect <- renderUI({
 # The Fishery/production-type choices when category isn't fisheries
 output$fisheriesOptions <- renderUI({
     if (input$Sect_sel == "CV") {
-        if (!is.null(input$CategorySelect) && input$CategorySelect != "Fisheries") {
+        if (
+            !is.null(input$CategorySelect) &&
+                input$CategorySelect != "Fisheries"
+        ) {
             radioButtons("inSelect", "Fisheries", fishgrps4cats)
         }
     } else if (input$Sect_sel == "FR") {
-        if (!is.null(input$CategorySelect) && input$CategorySelect != "Fisheries") {
+        if (
+            !is.null(input$CategorySelect) &&
+                input$CategorySelect != "Fisheries"
+        ) {
             radioButtons("inSelect", "Production Categories", prod4cats)
         }
     }
@@ -795,156 +961,278 @@ output$filters <- renderUI({
         tabsetPanel(
             tabPanel(DatVars()$CATEGORY[1]),
             tabPanel(DatVars()$CATEGORY[2]),
-            tabPanel(names(DatVars()$CATEGORY[3]), value = DatVars()$CATEGORY[3]),
+            tabPanel(
+                names(DatVars()$CATEGORY[3]),
+                value = DatVars()$CATEGORY[3]
+            ),
             tabPanel(DatVars()$CATEGORY[4]),
             id = "CategorySelect"
         )
     } else if (input$Sect_sel == "FR") {
         tabsetPanel(
-            tabPanel(names(DatVars()$CATEGORY[1]), value = DatVars()$CATEGORY[1]),
+            tabPanel(
+                names(DatVars()$CATEGORY[1]),
+                value = DatVars()$CATEGORY[1]
+            ),
             tabPanel(DatVars()$CATEGORY[2]),
             tabPanel(DatVars()$CATEGORY[3]),
             id = "CategorySelect"
         )
-    } else {
-    }
+    } else {}
 })
 
 # Sets the list of variables (fisheries/prod types)
 output$Variableselect <- renderUI({
     # There are no filters for Motherships or CP
     if (input$Sect_sel == "M" | input$Sect_sel == "CP") {
-        hidden(checkboxGroupInput("VariableSelect", "", choices = "At-sea Pacific whiting", selected = "At-sea Pacific whiting"))
+        hidden(checkboxGroupInput(
+            "VariableSelect",
+            "",
+            choices = "At-sea Pacific whiting",
+            selected = "At-sea Pacific whiting"
+        ))
     } else if (!is.null(input$CategorySelect)) {
         # Catcher vessels
         if (input$Sect_sel == "CV") {
             if (input$CategorySelect == "State") {
+                # state
                 if (!input$LayoutSelect) {
                     tagList(
-                        checkboxGroupInput("VariableSelect", NULL, choices = vss.st, selected = vss.st[1])
+                        checkboxGroupInput(
+                            "VariableSelect",
+                            NULL,
+                            choices = vss.st,
+                            selected = vss.st[1]
+                        )
                     )
                 } else {
                     tagList(
                         tags$div(
                             class = "rbutton3",
-                            radioButtons("VariableSelect", NULL, choices = vss.st, selected = vss.st[1])
+                            radioButtons(
+                                "VariableSelect",
+                                NULL,
+                                choices = vss.st,
+                                selected = vss.st[1]
+                            )
                         )
                     )
                 }
-            } # state
-            else if (input$CategorySelect == "Vessel length class") {
+            } else if (input$CategorySelect == "Vessel length class") {
                 if (!input$LayoutSelect) {
                     tagList(
-                        checkboxGroupInput("VariableSelect", NULL, choices = vsssize, selected = "Large vessel (> 80 ft)")
+                        checkboxGroupInput(
+                            "VariableSelect",
+                            NULL,
+                            choices = vsssize,
+                            selected = "Large vessel (> 80 ft)"
+                        )
                     )
                 } else {
                     tagList(
                         tags$div(
                             class = "rbutton3",
-                            radioButtons("VariableSelect", NULL, choices = vsssize, selected = "Large vessel (> 80 ft)")
+                            radioButtons(
+                                "VariableSelect",
+                                NULL,
+                                choices = vsssize,
+                                selected = "Large vessel (> 80 ft)"
+                            )
                         )
                     )
                 }
             } else if (input$CategorySelect == "Homeport") {
+                # end homeport
                 if (!input$LayoutSelect) {
                     tagList(
                         tags$div(
-                            checkboxGroupInput("VariableSelect", NULL, choices = vss.port, selected = vss.port[1])
+                            checkboxGroupInput(
+                                "VariableSelect",
+                                NULL,
+                                choices = vss.port,
+                                selected = vss.port[1]
+                            )
                         )
                     )
                 } else {
                     tagList(
                         tags$div(
                             class = "rbutton3",
-                            radioButtons("VariableSelect", NULL, choices = vss.port, selected = vss.port[1])
+                            radioButtons(
+                                "VariableSelect",
+                                NULL,
+                                choices = vss.port,
+                                selected = vss.port[1]
+                            )
                         )
                     )
                 }
-            } # end homeport
-            else if (input$CategorySelect == "Fisheries") {
+            } else if (input$CategorySelect == "Fisheries") {
                 if (!input$LayoutSelect) {
                     if (input$FishWhitingSelect != "All vessels") {
                         if (input$Ind_sel %in% c("Economic", "Cost", "Labor")) {
                             tags$div(
                                 class = "fishvarshortcv",
-                                checkboxGroupInput("VariableSelect", NULL, choices = fish.var.grps, selected = fish.var[1])
+                                checkboxGroupInput(
+                                    "VariableSelect",
+                                    NULL,
+                                    choices = fish.var.grps,
+                                    selected = fish.var[1]
+                                )
                             )
                         } else if (input$Ind_sel == "Vessel characteristics") {
-                            if (input$demSelect %in% c("Vessel replacement value", "Vessel market value")) {
+                            if (
+                                input$demSelect %in%
+                                    c(
+                                        "Vessel replacement value",
+                                        "Vessel market value"
+                                    )
+                            ) {
                                 tags$div(
                                     class = "fishvarshortcv",
-                                    checkboxGroupInput("VariableSelect", NULL, choices = fish.var.grps, selected = fish.var[1])
+                                    checkboxGroupInput(
+                                        "VariableSelect",
+                                        NULL,
+                                        choices = fish.var.grps,
+                                        selected = fish.var[1]
+                                    )
                                 )
                             } else {
                                 tags$div(
                                     class = "fishvarcv",
-                                    checkboxGroupInput("VariableSelect", NULL, choices = fish.var, selected = fish.var[1])
+                                    checkboxGroupInput(
+                                        "VariableSelect",
+                                        NULL,
+                                        choices = fish.var,
+                                        selected = fish.var[1]
+                                    )
                                 )
                             }
                         } else if (input$Ind_sel == "Other") {
                             if (input$otherSelect == "Days at sea") {
                                 tags$div(
                                     class = "fishvarshortcv",
-                                    checkboxGroupInput("VariableSelect", NULL, choices = fish.var.grps, selected = fish.var[1])
+                                    checkboxGroupInput(
+                                        "VariableSelect",
+                                        NULL,
+                                        choices = fish.var.grps,
+                                        selected = fish.var[1]
+                                    )
                                 )
                             } else {
                                 tags$div(
                                     class = "fishvarcv",
-                                    checkboxGroupInput("VariableSelect", NULL, choices = fish.var, selected = fish.var[1])
+                                    checkboxGroupInput(
+                                        "VariableSelect",
+                                        NULL,
+                                        choices = fish.var,
+                                        selected = fish.var[1]
+                                    )
                                 )
                             }
                         } else {
                             tags$div(
                                 class = "fishvarcv",
-                                checkboxGroupInput("VariableSelect", NULL, choices = fish.var, selected = fish.var[1])
+                                checkboxGroupInput(
+                                    "VariableSelect",
+                                    NULL,
+                                    choices = fish.var,
+                                    selected = fish.var[1]
+                                )
                             )
                         }
                     } else {
                         tags$div(
                             class = "fishvarcv",
-                            checkboxGroupInput("VariableSelect", NULL, choices = fish.var, selected = fish.var[1])
+                            checkboxGroupInput(
+                                "VariableSelect",
+                                NULL,
+                                choices = fish.var,
+                                selected = fish.var[1]
+                            )
                         )
                     }
                 } else if (input$FishWhitingSelect != "All vessels") {
                     if (input$Ind_sel %in% c("Economic", "Cost", "Labor")) {
                         tags$div(
                             class = "fishvarshortcv",
-                            radioButtons("VariableSelect", NULL, choices = fish.var.grps, selected = fish.var[1])
+                            radioButtons(
+                                "VariableSelect",
+                                NULL,
+                                choices = fish.var.grps,
+                                selected = fish.var[1]
+                            )
                         )
                     } else if (input$Ind_sel == "Vessel characteristics") {
-                        if (input$demSelect %in% c("Vessel replacement value", "Vessel market value")) {
+                        if (
+                            input$demSelect %in%
+                                c(
+                                    "Vessel replacement value",
+                                    "Vessel market value"
+                                )
+                        ) {
                             tags$div(
                                 class = "fishvarshortcv",
-                                radioButtons("VariableSelect", NULL, choices = fish.var.grps, selected = fish.var[1])
+                                radioButtons(
+                                    "VariableSelect",
+                                    NULL,
+                                    choices = fish.var.grps,
+                                    selected = fish.var[1]
+                                )
                             )
                         } else {
                             tags$div(
                                 class = "fishvarcv",
-                                radioButtons("VariableSelect", NULL, choices = fish.var, selected = fish.var[1])
+                                radioButtons(
+                                    "VariableSelect",
+                                    NULL,
+                                    choices = fish.var,
+                                    selected = fish.var[1]
+                                )
                             )
                         }
                     } else if (input$Ind_sel == "Other") {
                         if (input$otherSelect == "Days at sea") {
                             tags$div(
                                 class = "fishvarshortcv",
-                                radioButtons("VariableSelect", NULL, choices = fish.var.grps, selected = fish.var[1])
+                                radioButtons(
+                                    "VariableSelect",
+                                    NULL,
+                                    choices = fish.var.grps,
+                                    selected = fish.var[1]
+                                )
                             )
                         } else {
                             tags$div(
                                 class = "fishvarcv",
-                                radioButtons("VariableSelect", NULL, choices = fish.var, selected = fish.var[1])
+                                radioButtons(
+                                    "VariableSelect",
+                                    NULL,
+                                    choices = fish.var,
+                                    selected = fish.var[1]
+                                )
                             )
                         }
                     } else {
                         tags$div(
                             class = "fishvarcv",
-                            radioButtons("VariableSelect", NULL, choices = fish.var, selected = fish.var[1])
+                            radioButtons(
+                                "VariableSelect",
+                                NULL,
+                                choices = fish.var,
+                                selected = fish.var[1]
+                            )
                         )
                     }
                 } else {
                     tags$div(
                         class = "fishvarcv",
-                        radioButtons("VariableSelect", NULL, choices = fish.var, selected = fish.var[1])
+                        radioButtons(
+                            "VariableSelect",
+                            NULL,
+                            choices = fish.var,
+                            selected = fish.var[1]
+                        )
                     )
                 }
             } # end fisheries
@@ -954,8 +1242,13 @@ output$Variableselect <- renderUI({
                     tagList(
                         tags$div(
                             class = "ckbox",
-                            checkboxGroupInput("VariableSelect", NULL,
-                                choices = c("Washington and Oregon", "California"),
+                            checkboxGroupInput(
+                                "VariableSelect",
+                                NULL,
+                                choices = c(
+                                    "Washington and Oregon",
+                                    "California"
+                                ),
                                 selected = "Washington and Oregon"
                             )
                         )
@@ -964,8 +1257,13 @@ output$Variableselect <- renderUI({
                     tagList(
                         tags$div(
                             class = "rbutton3",
-                            radioButtons("VariableSelect", NULL,
-                                choices = c("Washington and Oregon", "California"),
+                            radioButtons(
+                                "VariableSelect",
+                                NULL,
+                                choices = c(
+                                    "Washington and Oregon",
+                                    "California"
+                                ),
                                 selected = "Washington and Oregon"
                             )
                         )
@@ -975,7 +1273,9 @@ output$Variableselect <- renderUI({
                 if (!input$LayoutSelect) {
                     tagList(
                         tags$div(
-                            checkboxGroupInput("VariableSelect", NULL,
+                            checkboxGroupInput(
+                                "VariableSelect",
+                                NULL,
                                 choices = c("Large", "Medium", "Small"),
                                 selected = "Large"
                             )
@@ -985,7 +1285,12 @@ output$Variableselect <- renderUI({
                     tagList(
                         tags$div(
                             class = "rbutton3",
-                            radioButtons("VariableSelect", NULL, choices = c("Large", "Medium", "Small"), selected = "Large")
+                            radioButtons(
+                                "VariableSelect",
+                                NULL,
+                                choices = c("Large", "Medium", "Small"),
+                                selected = "Large"
+                            )
                         )
                     )
                 }
@@ -996,53 +1301,89 @@ output$Variableselect <- renderUI({
                             tagList(
                                 tags$div(
                                     class = "prodfr",
-                                    checkboxGroupInput("VariableSelect", NULL, choices = prod.var, selected = "All production")
+                                    checkboxGroupInput(
+                                        "VariableSelect",
+                                        NULL,
+                                        choices = prod.var,
+                                        selected = "All production"
+                                    )
                                 )
                             )
                         } else {
                             tagList(
                                 tags$div(
                                     class = "prodfr",
-                                    radioButtons("VariableSelect", NULL, choices = prod.var, selected = "All production")
+                                    radioButtons(
+                                        "VariableSelect",
+                                        NULL,
+                                        choices = prod.var,
+                                        selected = "All production"
+                                    )
                                 )
                             )
                         }
                     } else {
                         if (!input$LayoutSelect) {
-                            if (input$otherSelect %in% c(
-                                "Percentage of West Coast groundfish landed value purchased",
-                                "Percentage of West Coast groundfish landed weight purchased"
-                            )) {
+                            if (
+                                input$otherSelect %in%
+                                    c(
+                                        "Percentage of West Coast groundfish landed value purchased",
+                                        "Percentage of West Coast groundfish landed weight purchased"
+                                    )
+                            ) {
                                 tagList(
                                     tags$div(
                                         class = "ckboxFR",
-                                        checkboxGroupInput("VariableSelect", NULL, choices = prod.var, selected = "Groundfish production")
+                                        checkboxGroupInput(
+                                            "VariableSelect",
+                                            NULL,
+                                            choices = prod.var,
+                                            selected = "Groundfish production"
+                                        )
                                     )
                                 )
                             } else {
                                 tagList(
                                     tags$div(
                                         class = "ckboxFR",
-                                        checkboxGroupInput("VariableSelect", NULL, choices = prod.var, selected = "All production")
+                                        checkboxGroupInput(
+                                            "VariableSelect",
+                                            NULL,
+                                            choices = prod.var,
+                                            selected = "All production"
+                                        )
                                     )
                                 )
                             }
                         } else {
-                            if (input$otherSelect %in% c(
-                                "Percentage of West Coast groundfish landed value purchased",
-                                "Percentage of West Coast groundfish landed weight purchased"
-                            )) {
+                            if (
+                                input$otherSelect %in%
+                                    c(
+                                        "Percentage of West Coast groundfish landed value purchased",
+                                        "Percentage of West Coast groundfish landed weight purchased"
+                                    )
+                            ) {
                                 tagList(
                                     tags$div(
                                         class = "rbFR",
-                                        checkboxGroupInput("VariableSelect", NULL, choices = prod.var, selected = "Groundfish production")
+                                        checkboxGroupInput(
+                                            "VariableSelect",
+                                            NULL,
+                                            choices = prod.var,
+                                            selected = "Groundfish production"
+                                        )
                                     )
                                 )
                             } else {
                                 tagList(
                                     tags$div(
                                         class = "rbFR",
-                                        checkboxGroupInput("VariableSelect", NULL, choices = prod.var, selected = "All production")
+                                        checkboxGroupInput(
+                                            "VariableSelect",
+                                            NULL,
+                                            choices = prod.var,
+                                            selected = "All production"
+                                        )
                                     )
                                 )
                             }
@@ -1050,40 +1391,66 @@ output$Variableselect <- renderUI({
                     }
                 } else {
                     if (!input$LayoutSelect) {
-                        if (input$crewSelect %in% c(
-                            "Total production employee payments",
-                            "Total non-production employee payments"
-                        )) {
+                        if (
+                            input$crewSelect %in%
+                                c(
+                                    "Total production employee payments",
+                                    "Total non-production employee payments"
+                                )
+                        ) {
                             tagList(
                                 tags$div(
                                     class = "prodfr",
-                                    checkboxGroupInput("VariableSelect", NULL, choices = prod.var, selected = "All production")
+                                    checkboxGroupInput(
+                                        "VariableSelect",
+                                        NULL,
+                                        choices = prod.var,
+                                        selected = "All production"
+                                    )
                                 )
                             )
                         } else {
                             tagList(
                                 tags$div(
                                     class = "prodfr",
-                                    checkboxGroupInput("VariableSelect", NULL, choices = "All production", selected = "All production")
+                                    checkboxGroupInput(
+                                        "VariableSelect",
+                                        NULL,
+                                        choices = "All production",
+                                        selected = "All production"
+                                    )
                                 )
                             )
                         }
                     } else {
-                        if (input$crewSelect %in% c(
-                            "Total production employee payments",
-                            "Total non-production employee payments"
-                        )) {
+                        if (
+                            input$crewSelect %in%
+                                c(
+                                    "Total production employee payments",
+                                    "Total non-production employee payments"
+                                )
+                        ) {
                             tagList(
                                 tags$div(
                                     class = "prodfr",
-                                    radioButtons("VariableSelect", NULL, choices = prod.var, selected = "All production")
+                                    radioButtons(
+                                        "VariableSelect",
+                                        NULL,
+                                        choices = prod.var,
+                                        selected = "All production"
+                                    )
                                 )
                             )
                         } else {
                             tagList(
                                 tags$div(
                                     class = "prodfr",
-                                    radioButtons("VariableSelect", NULL, choices = "All production", selected = "All production")
+                                    radioButtons(
+                                        "VariableSelect",
+                                        NULL,
+                                        choices = "All production",
+                                        selected = "All production"
+                                    )
                                 )
                             )
                         }
@@ -1099,18 +1466,24 @@ output$FishAkselect <- renderUI({
     if (is.null(input$LayoutSelect)) {
         if (input$Sect_sel == "CV") {
             if (!is.null(input[["demSelect"]])) {
-                if (input$demSelect %in% c(
-                    "Revenue diversification",
-                    "Proportion of ex-vessel revenue from CS fishery",
-                    "Number of fisheries"
-                )) {
+                if (
+                    input$demSelect %in%
+                        c(
+                            "Revenue diversification",
+                            "Proportion of ex-vessel revenue from CS fishery",
+                            "Number of fisheries"
+                        )
+                ) {
                     tagList(
-                        tags$div(style = "font-weight:bold; margin-bottom: 7px", "Alaskan Fisheries:"),
+                        tags$div(
+                            style = "font-weight:bold; margin-bottom: 7px",
+                            "Alaskan Fisheries:"
+                        ),
                         tags$div(
                             materialSwitch(
                                 inputId = "FishAkSelect",
-                                label   = "Alaskan fisheries",
-                                right   = TRUE
+                                label = "Alaskan fisheries",
+                                right = TRUE
                             )
                         )
                     )
@@ -1125,23 +1498,27 @@ output$FishWhitingselectBox <- renderUI({
     if (input$Sect_sel == "FR") {
         tags$div(
             class = "ckbox",
-            checkboxGroupInput("FishWhitingSelect",
+            checkboxGroupInput(
+                "FishWhitingSelect",
                 HTML(
                     "<div> Processor type:<button id='iwhiting' type='button' class='btn btn-default action-button shiny-bound-input'> <i class='fa fa-info-circle fa-fw'></i>
           </button></div>"
                 ),
-                choices = DatVars()$whitingv, selected = DatVars()$whitingv[1]
+                choices = DatVars()$whitingv,
+                selected = DatVars()$whitingv[1]
             )
         )
     } else {
         tags$div(
             class = "ckbox",
-            checkboxGroupInput("FishWhitingSelect",
+            checkboxGroupInput(
+                "FishWhitingSelect",
                 HTML(
                     "<div> Vessel type:<button id='iwhiting' type='button' class='btn btn-default action-button shiny-bound-input'> <i class='fa fa-info-circle fa-fw'></i>
           </button></div>"
                 ),
-                choices = DatVars()$whitingv, selected = DatVars()$whitingv[1]
+                choices = DatVars()$whitingv,
+                selected = DatVars()$whitingv[1]
             )
         )
     }
@@ -1212,8 +1589,6 @@ output$other_html <- renderUI({
 })
 
 
-
-
 # simple text output that has link for the html document ####
 
 # OBSERVER ####
@@ -1223,23 +1598,31 @@ observe({
         return()
     } else if (input$PR_NPR_CREW == "PR") {
         if (input$LayoutSelect) {
-            updateCheckboxGroupInput(session, "crewSelect",
+            updateCheckboxGroupInput(
+                session,
+                "crewSelect",
                 choiceNames = lapply(labor_cpms_proc$metric_link, HTML),
                 choiceValues = labor_cpms_proc$metric_value
             )
         } else {
-            updateRadioButtons(session, "crewSelect",
+            updateRadioButtons(
+                session,
+                "crewSelect",
                 choiceNames = lapply(labor_cpms_proc$metric_link, HTML),
                 choiceValues = labor_cpms_proc$metric_value
             )
         }
     } else if (input$LayoutSelect) {
-        updateCheckboxGroupInput(session, "crewSelect",
+        updateCheckboxGroupInput(
+            session,
+            "crewSelect",
             choiceNames = lapply(labor_cpms_nonproc$metric_link, HTML),
             choiceValues = labor_cpms_nonproc$metric_value
         )
     } else {
-        updateRadioButtons(session, "crewSelect",
+        updateRadioButtons(
+            session,
+            "crewSelect",
             choiceNames = lapply(labor_cpms_nonproc$metric_link, HTML),
             choiceValues = labor_cpms_nonproc$metric_value
         )
@@ -1252,23 +1635,31 @@ observe({
         return()
     } else if (input$CPT_CREW == "CREW") {
         if (input$LayoutSelect) {
-            updateCheckboxGroupInput(session, "crewSelect",
+            updateCheckboxGroupInput(
+                session,
+                "crewSelect",
                 choiceNames = lapply(labor_cv_crew$metric_link, HTML),
                 choiceValues = labor_cv_crew$metric_value
             )
         } else {
-            updateRadioButtons(session, "crewSelect",
+            updateRadioButtons(
+                session,
+                "crewSelect",
                 choiceNames = lapply(labor_cv_crew$metric_link, HTML),
                 choiceValues = labor_cv_crew$metric_value
             )
         }
     } else if (input$LayoutSelect) {
-        updateCheckboxGroupInput(session, "crewSelect",
+        updateCheckboxGroupInput(
+            session,
+            "crewSelect",
             choiceNames = lapply(labor_cv_captain$metric_link, HTML),
             choiceValues = labor_cv_captain$metric_value
         )
     } else {
-        updateRadioButtons(session, "crewSelect",
+        updateRadioButtons(
+            session,
+            "crewSelect",
             choiceNames = lapply(labor_cv_captain$metric_link, HTML),
             choiceValues = labor_cv_captain$metric_value
         )
@@ -1281,23 +1672,31 @@ observe({
         return()
     } else if (input$PRD_NONPRD == "PRD") {
         if (input$LayoutSelect) {
-            updateCheckboxGroupInput(session, "crewSelect",
+            updateCheckboxGroupInput(
+                session,
+                "crewSelect",
                 choiceNames = lapply(labor_fr_prod$metric_link, HTML),
                 choiceValues = labor_fr_prod$metric_value
             )
         } else {
-            updateRadioButtons(session, "crewSelect",
+            updateRadioButtons(
+                session,
+                "crewSelect",
                 choiceNames = lapply(labor_fr_prod$metric_link, HTML),
                 choiceValues = labor_fr_prod$metric_value
             )
         }
     } else if (input$LayoutSelect) {
-        updateCheckboxGroupInput(session, "crewSelect",
+        updateCheckboxGroupInput(
+            session,
+            "crewSelect",
             choiceNames = lapply(labor_fr_nonprod$metric_link, HTML),
             choiceValues = labor_fr_nonprod$metric_value
         )
     } else {
-        updateRadioButtons(session, "crewSelect",
+        updateRadioButtons(
+            session,
+            "crewSelect",
             choiceNames = lapply(labor_fr_nonprod$metric_link, HTML),
             choiceValues = labor_fr_nonprod$metric_value
         )
@@ -1310,27 +1709,63 @@ observe({
         return()
     } else if (input$Sect_sel == "FR") {
         if (input$AVE_MED == "M") {
-            updateRadioButtons(session, "econStats", choices = c(DatVars()$STAT[4:5]))
+            updateRadioButtons(
+                session,
+                "econStats",
+                choices = c(DatVars()$STAT[4:5])
+            )
         } else if (input$AVE_MED == "A") {
-            updateRadioButtons(session, "econStats", choices = c(DatVars()$STAT[1:2]))
+            updateRadioButtons(
+                session,
+                "econStats",
+                choices = c(DatVars()$STAT[1:2])
+            )
         } else if (input$AVE_MED == "T") {
-            updateRadioButtons(session, "econStats", choices = c(DatVars()$STAT[7:8]))
+            updateRadioButtons(
+                session,
+                "econStats",
+                choices = c(DatVars()$STAT[7:8])
+            )
         }
     } else if (input$Sect_sel == "M" || input$Sect_sel == "CP") {
         if (input$AVE_MED == "M") {
-            updateRadioButtons(session, "econStats", choices = c(DatVars()$STAT[6:9]))
+            updateRadioButtons(
+                session,
+                "econStats",
+                choices = c(DatVars()$STAT[6:9])
+            )
         } else if (input$AVE_MED == "A") {
-            updateRadioButtons(session, "econStats", choices = c(DatVars()$STAT[1:4]))
+            updateRadioButtons(
+                session,
+                "econStats",
+                choices = c(DatVars()$STAT[1:4])
+            )
         } else if (input$AVE_MED == "T") {
-            updateRadioButtons(session, "econStats", choices = c(DatVars()$STAT[11:14]))
+            updateRadioButtons(
+                session,
+                "econStats",
+                choices = c(DatVars()$STAT[11:14])
+            )
         }
     } else {
         if (input$AVE_MED == "M") {
-            updateRadioButtons(session, "econStats", choices = c(DatVars()$STAT[5:7]))
+            updateRadioButtons(
+                session,
+                "econStats",
+                choices = c(DatVars()$STAT[5:7])
+            )
         } else if (input$AVE_MED == "A") {
-            updateRadioButtons(session, "econStats", choices = c(DatVars()$STAT[1:3]))
+            updateRadioButtons(
+                session,
+                "econStats",
+                choices = c(DatVars()$STAT[1:3])
+            )
         } else if (input$AVE_MED == "T") {
-            updateRadioButtons(session, "econStats", choices = c(DatVars()$STAT[9:11]))
+            updateRadioButtons(
+                session,
+                "econStats",
+                choices = c(DatVars()$STAT[9:11])
+            )
         }
     }
 })
@@ -1341,26 +1776,62 @@ observe({
         return()
     } else if (input$Sect_sel == "M" || input$Sect_sel == "CP") {
         if (input$AVE_MED_COSTS == "M") {
-            updateRadioButtons(session, "costStats", choices = c(DatVars()$STAT[6:10]))
+            updateRadioButtons(
+                session,
+                "costStats",
+                choices = c(DatVars()$STAT[6:10])
+            )
         } else if (input$AVE_MED_COSTS == "A") {
-            updateRadioButtons(session, "costStats", choices = c(DatVars()$STAT[1:5]))
+            updateRadioButtons(
+                session,
+                "costStats",
+                choices = c(DatVars()$STAT[1:5])
+            )
         } else if (input$AVE_MED_COSTS == "T") {
-            updateRadioButtons(session, "costStats", choices = c(DatVars()$STAT[11:15]))
+            updateRadioButtons(
+                session,
+                "costStats",
+                choices = c(DatVars()$STAT[11:15])
+            )
         }
     } else if (input$Sect_sel == "CV") {
         if (input$AVE_MED_COSTS == "M") {
-            updateRadioButtons(session, "costStats", choices = c(DatVars()$STAT[5:8]))
+            updateRadioButtons(
+                session,
+                "costStats",
+                choices = c(DatVars()$STAT[5:8])
+            )
         } else if (input$AVE_MED_COSTS == "A") {
-            updateRadioButtons(session, "costStats", choices = c(DatVars()$STAT[1:4]))
+            updateRadioButtons(
+                session,
+                "costStats",
+                choices = c(DatVars()$STAT[1:4])
+            )
         } else if (input$AVE_MED_COSTS == "T") {
-            updateRadioButtons(session, "costStats", choices = c(DatVars()$STAT[9:12]))
+            updateRadioButtons(
+                session,
+                "costStats",
+                choices = c(DatVars()$STAT[9:12])
+            )
         }
     } else if (input$AVE_MED_COSTS == "M") {
-        updateRadioButtons(session, "costStats", choices = c(DatVars()$STAT[4:6]))
+        updateRadioButtons(
+            session,
+            "costStats",
+            choices = c(DatVars()$STAT[4:6])
+        )
     } else if (input$AVE_MED_COSTS == "A") {
-        updateRadioButtons(session, "costStats", choices = c(DatVars()$STAT[1:3]))
+        updateRadioButtons(
+            session,
+            "costStats",
+            choices = c(DatVars()$STAT[1:3])
+        )
     } else if (input$AVE_MED_COSTS == "T") {
-        updateRadioButtons(session, "costStats", choices = c(DatVars()$STAT[7:9]))
+        updateRadioButtons(
+            session,
+            "costStats",
+            choices = c(DatVars()$STAT[7:9])
+        )
     }
 })
 
@@ -1369,7 +1840,11 @@ observeEvent(input$reset_input, {
     if (input$LayoutSelect) {
         updateRadioButtons(session, "VariableSelect", selected = "")
     } else {
-        updateCheckboxGroupInput(session, "VariableSelect", selected = as.character(0))
+        updateCheckboxGroupInput(
+            session,
+            "VariableSelect",
+            selected = as.character(0)
+        )
     }
 })
 
