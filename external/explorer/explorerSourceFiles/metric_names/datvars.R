@@ -2,7 +2,13 @@
 
 currentyear <- 2024
 currentyearFR <- 2023
-nrcomponents <- c('Revenue', 'Variable costs', 'Fixed costs', 'Variable cost net revenue', 'Total cost net revenue')
+nrcomponents <- c(
+    'Revenue',
+    'Variable costs',
+    'Fixed costs',
+    'Variable cost net revenue',
+    'Total cost net revenue'
+)
 
 # CV
 datVars_cv <- list(
@@ -15,7 +21,7 @@ datVars_cv <- list(
         "Vessel length class"
     ),
     whitingv = c("All vessels", "Non-whiting vessels", "Whiting vessels"),
-    STAT =  c(
+    STAT = c(
         "Mean per vessel",
         "Mean per vessel/day",
         "Mean per vessel/metric ton caught",
@@ -36,15 +42,27 @@ save(datVars_cv, file = "data/datvars_cv.RData")
 # FR
 datVars_fr <- list(
     YEAR = 2004:currentyearFR,
-    NRlist = c('Revenue', 'Seafood sales revenue', 'Offload revenue', 'Custom processing and other revenue',
-        'Variable costs', 'Fixed costs', 'Variable cost net revenue', 'Total cost net revenue'),
-    CATEGORY = c("Production activities" = "Fisheries", "Region", "Processor size"),
+    NRlist = c(
+        'Revenue',
+        'Seafood sales revenue',
+        'Offload revenue',
+        'Custom processing and other revenue',
+        'Variable costs',
+        'Fixed costs',
+        'Variable cost net revenue',
+        'Total cost net revenue'
+    ),
+    CATEGORY = c(
+        "Production activities" = "Fisheries",
+        "Region",
+        "Processor size"
+    ),
     whitingv = c(
         "All processors",
         "Whiting processors",
         "Non-whiting processors"
     ),
-    STAT =  c(
+    STAT = c(
         "Mean per processor",
         "Mean per processor/metric ton produced",
         "Mean per processor/dollar of revenue",
@@ -65,7 +83,7 @@ datVars_ms <- list(
     NRlist = nrcomponents,
     CATEGORY = "Fisheries",
     whitingv = "Whiting vessels",
-    STAT =  c(
+    STAT = c(
         "Mean per vessel",
         "Mean per vessel/day",
         "Mean per vessel/metric ton purchased",
@@ -94,7 +112,7 @@ datVars_cp <- list(
     NRlist = nrcomponents,
     CATEGORY = "Fisheries",
     whitingv = "Whiting vessels",
-    STAT =  c(
+    STAT = c(
         "Mean per vessel",
         "Mean per vessel/day",
         "Mean per vessel/metric ton produced",

@@ -13,10 +13,8 @@ source("external/serverHead.R")
 options(shiny.sanitize.errors = FALSE)
 #options(shiny.trace=FALSE)
 
-
 shinyServer(
-    function(input, output, session) {    
-        source("external/explorer/explorer.R", local=T)    
+    function(input, output, session) {
+        source("external/explorer/explorer.R", local = T)
     }
 )
-
