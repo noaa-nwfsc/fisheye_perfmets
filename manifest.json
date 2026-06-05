@@ -2137,7 +2137,7 @@
   },
   "files": {
     ".Rprofile": {
-      "checksum": "ddf0f8e03c4b15772cf5ccae5521c7d1"
+      "checksum": "8d729e785e020b7776d4a3e18702df20"
     },
     "appFrame.R": {
       "checksum": "bad15406e633cf430b3e2ab21f18a61e"
@@ -2155,7 +2155,7 @@
       "checksum": "3905bf63a23c6f89a8574f6dbaadcb4a"
     },
     "data/CVperfmetrics.rds": {
-      "checksum": "230a6db76c0a3bcf1e0f1a0a53612900"
+      "checksum": "251b96840ca84640525aa1cdf06ea3a7"
     },
     "data/datvars_cp.RData": {
       "checksum": "05c69e481fd88f5b8eb742555ef3e51f"
@@ -2173,7 +2173,7 @@
       "checksum": "cbee7807180e064566e52d51ace2b0a5"
     },
     "data/FRperfmetrics.rds": {
-      "checksum": "cc9f1e2d41556f0c6adf1fc902d210fc"
+      "checksum": "037c77336105bef65eeeb5d6b4874d7c"
     },
     "data/gdp_defl.RData": {
       "checksum": "5ddb696c2747582500e5fa087e509b5a"
@@ -2233,7 +2233,7 @@
       "checksum": "60d70014abfc0ea18fba9aacd84b3bbd"
     },
     "external/explorer/explorerSourceFiles/ex.reactives.R": {
-      "checksum": "929d21d9880f17bbd7617bbd86b38d03"
+      "checksum": "11a3329d729fe118b43efbfd365f9d81"
     },
     "external/explorer/explorerSourceFiles/help.R": {
       "checksum": "b2fee8028f29005660e2d6fed74a55e1"
@@ -2242,10 +2242,10 @@
       "checksum": "8ab5c9d6922db972acbe894e431968f0"
     },
     "external/explorer/explorerSourceFiles/metric_names/datvars.R": {
-      "checksum": "5cb7f48e686f95998ade3f99bbfb5960"
+      "checksum": "e1a6009629f732b69676e42b225b2b83"
     },
     "external/explorer/explorerSourceFiles/metric_names/metric_names.R": {
-      "checksum": "96efe76d2226fc7301fd3b72b33edc3c"
+      "checksum": "be8fe546287367a688919cc1afc90f3a"
     },
     "external/serverHead.R": {
       "checksum": "1c02a0a2e3137497040ac4627d380d59"
@@ -2275,7 +2275,7 @@
       "checksum": "cbd94c683b59a29dc2fd34bf62fe11db"
     },
     "server.R": {
-      "checksum": "dc169af1d3c563e15504ca59400c7a90"
+      "checksum": "7a79b3497c7330e272e6df8e279cb56a"
     },
     "ui.R": {
       "checksum": "6c548c6cbd76813dec865a064db688dd"
@@ -2284,7 +2284,7 @@
       "checksum": "c444f8641f1241f8154f3f2eef72c0bf"
     },
     "Update_perfmetric_files.R": {
-      "checksum": "7f5456654647824064bd5dcb780e1977"
+      "checksum": "d31215e1fd5d65c619a1b055f56d3bfa"
     },
     "www/2012CatcherProcessor.jpg": {
       "checksum": "4ec73b664c728647113d980eae8871f4"

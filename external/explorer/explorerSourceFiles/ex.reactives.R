@@ -314,9 +314,7 @@ DatSubTable <- reactive({
     }
 
     alwaysexclude <- c(
-        'metric_flag',
         'conf',
-        'flag',
         'unit',
         'ylab',
         'sort',
