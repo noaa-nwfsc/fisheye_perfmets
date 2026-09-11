@@ -1,9 +1,9 @@
 doPlotDownload <- function(dat, x, y) {
     if (PermitPlot()) {
-        dat <- subset(dat, is.na(dat$VALUE) == FALSE)
+        dat4plot <- subset(dat, is.na(dat$VALUE) == FALSE)
         ##Prepping data for plotting by converting to more "plot friendly" values
-        dat <- mutate(
-            dat,
+        dat4plot <- mutate(
+            dat4plot,
             VARIANCE = case_when(
                 unit == '' ~ VARIANCE,
                 unit == 'thousands' ~ VARIANCE / 1e3,
@@ -34,17 +34,17 @@ doPlotDownload <- function(dat, x, y) {
             )
         )
 
-        dat$sort2 <- if (!input$LayoutSelect) {
-            reorder(dat$VARIABLE, dat$sort)
+        dat4plot$sort2 <- if (!input$LayoutSelect) {
+            reorder(dat4plot$VARIABLE, dat4plot$sort)
         } else {
-            reorder(dat$ylab, dat$sort)
+            reorder(dat4plot$ylab, dat4plot$sort)
         }
         #
-        # dat$thresh <-  if(input$Ind_sel=="Economic"){
-        #   length(unique(dat$YEAR<=2010))
+        # dat4plot$thresh <-  if(input$Ind_sel=="Economic"){
+        #   length(unique(dat4plot$YEAR<=2010))
         # } else if(input$Ind_sel!="Economic"){
         #   if(input$LayoutSelect){
-        #     if(is.na(max(dat$VARIANCE))) {
+        #     if(is.na(max(dat4plot$VARIANCE))) {
         #       data.frame(dat %>%
         #                    group_by(METRIC) %>%
         #                    mutate(threshold=max(VALUE, na.rm=T)+max(VARIANCE, na.rm=T)+max(VALUE, na.rm=T)/10))%>%
@@ -60,141 +60,141 @@ doPlotDownload <- function(dat, x, y) {
         #   }
         #  }
 
-        dat$upper <-
+        dat4plot$upper <-
             if (input$Ind_sel == "Economic") {
                 if (input$AVE_MED == 'A') {
-                    dat$VALUE + dat$VARIANCE
+                    dat4plot$VALUE + dat4plot$VARIANCE
                 } else if (input$AVE_MED == 'T') {
-                    dat$VALUE
+                    dat4plot$VALUE
                 } else {
-                    dat$q75
+                    dat4plot$q75
                 }
             } else if (input$Ind_sel == 'Cost') {
                 if (input$AVE_MED_COSTS == 'A') {
-                    dat$VALUE + dat$VARIANCE
+                    dat4plot$VALUE + dat4plot$VARIANCE
                 } else if (input$AVE_MED_COSTS == 'T') {
-                    dat$VALUE
+                    dat4plot$VALUE
                 } else {
-                    dat$q75
+                    dat4plot$q75
                 }
             } else if (input$Ind_sel == 'Other') {
                 if (input$otherStats == 'Mean') {
-                    dat$VALUE + dat$VARIANCE
+                    dat4plot$VALUE + dat4plot$VARIANCE
                 } else if (input$otherStats == 'Total') {
-                    dat$VALUE
+                    dat4plot$VALUE
                 } else {
-                    dat$q75
+                    dat4plot$q75
                 }
             } else if (input$Ind_sel == 'Labor') {
                 if (input$crewStats == 'Mean') {
-                    dat$VALUE + dat$VARIANCE
+                    dat4plot$VALUE + dat4plot$VARIANCE
                 } else if (input$crewStats == 'Total') {
-                    dat$VALUE
+                    dat4plot$VALUE
                 } else {
-                    dat$q75
+                    dat4plot$q75
                 }
             } else if (
                 input$Ind_sel == 'Vessel characteristics' ||
                     input$Ind_sel == 'Processor characteristics'
             ) {
                 if (input$demStats == 'Mean') {
-                    dat$VALUE + dat$VARIANCE
+                    dat4plot$VALUE + dat4plot$VARIANCE
                 } else if (input$demStats == 'Total') {
-                    dat$VALUE
+                    dat4plot$VALUE
                 } else {
-                    dat$q75
+                    dat4plot$q75
                 }
             }
 
-        dat$lower <-
+        dat4plot$lower <-
             if (input$Ind_sel == "Economic") {
                 if (input$AVE_MED == 'A') {
-                    dat$VALUE - dat$VARIANCE
+                    dat4plot$VALUE - dat4plot$VARIANCE
                 } else if (input$AVE_MED == 'T') {
-                    dat$VALUE
+                    dat4plot$VALUE
                 } else {
-                    dat$q25
+                    dat4plot$q25
                 }
             } else if (input$Ind_sel == 'Cost') {
                 if (input$AVE_MED_COSTS == 'A') {
-                    dat$VALUE - dat$VARIANCE
+                    dat4plot$VALUE - dat4plot$VARIANCE
                 } else if (input$AVE_MED_COSTS == 'T') {
-                    dat$VALUE
+                    dat4plot$VALUE
                 } else {
-                    dat$q25
+                    dat4plot$q25
                 }
             } else if (input$Ind_sel == 'Other') {
                 if (input$otherStats == 'Mean') {
-                    dat$VALUE - dat$VARIANCE
+                    dat4plot$VALUE - dat4plot$VARIANCE
                 } else if (input$otherStats == 'Total') {
-                    dat$VALUE
+                    dat4plot$VALUE
                 } else {
-                    dat$q25
+                    dat4plot$q25
                 }
             } else if (input$Ind_sel == 'Labor') {
                 if (input$crewStats == 'Mean') {
-                    dat$VALUE - dat$VARIANCE
+                    dat4plot$VALUE - dat4plot$VARIANCE
                 } else if (input$crewStats == 'Total') {
-                    dat$VALUE
+                    dat4plot$VALUE
                 } else {
-                    dat$q25
+                    dat4plot$q25
                 }
             } else if (
                 input$Ind_sel == 'Vessel characteristics' ||
                     input$Ind_sel == 'Processor characteristics'
             ) {
                 if (input$demStats == 'Mean') {
-                    dat$VALUE - dat$VARIANCE
+                    dat4plot$VALUE - dat4plot$VARIANCE
                 } else if (input$demStats == 'Total') {
-                    dat$VALUE
+                    dat4plot$VALUE
                 } else {
-                    dat$q25
+                    dat4plot$q25
                 }
             }
 
         upper <- function() {
             if (input$Ind_sel == "Economic") {
                 if (input$AVE_MED == 'A') {
-                    max(dat$VALUE + dat$VARIANCE, na.rm = T)
+                    max(dat4plot$VALUE + dat4plot$VARIANCE, na.rm = T)
                 } else if (input$AVE_MED == 'M') {
-                    max(dat$q75, na.rm = T)
+                    max(dat4plot$q75, na.rm = T)
                 } else {
-                    max(dat$VALUE, na.rm = T)
+                    max(dat4plot$VALUE, na.rm = T)
                 }
             } else if (input$Ind_sel == 'Cost') {
                 if (input$AVE_MED_COSTS == 'A') {
-                    max(dat$VALUE + dat$VARIANCE, na.rm = T)
+                    max(dat4plot$VALUE + dat4plot$VARIANCE, na.rm = T)
                 } else if (input$AVE_MED_COSTS == 'M') {
-                    max(dat$q75, na.rm = T)
+                    max(dat4plot$q75, na.rm = T)
                 } else {
-                    max(dat$VALUE, na.rm = T)
+                    max(dat4plot$VALUE, na.rm = T)
                 }
             } else if (input$Ind_sel == 'Other') {
                 if (input$otherStats == 'Mean') {
-                    max(dat$VALUE + dat$VARIANCE, na.rm = T)
+                    max(dat4plot$VALUE + dat4plot$VARIANCE, na.rm = T)
                 } else if (input$otherStats == 'Median') {
-                    max(dat$q75, na.rm = T)
+                    max(dat4plot$q75, na.rm = T)
                 } else {
-                    max(dat$VALUE, na.rm = T)
+                    max(dat4plot$VALUE, na.rm = T)
                 }
             } else if (input$Ind_sel == 'Labor') {
                 if (input$crewStats == 'Mean') {
-                    max(dat$VALUE + dat$VARIANCE, na.rm = T)
+                    max(dat4plot$VALUE + dat4plot$VARIANCE, na.rm = T)
                 } else if (input$crewStats == 'Median') {
-                    max(dat$q75, na.rm = T)
+                    max(dat4plot$q75, na.rm = T)
                 } else {
-                    max(dat$VALUE, na.rm = T)
+                    max(dat4plot$VALUE, na.rm = T)
                 }
             } else if (
                 input$Ind_sel == 'Vessel characteristics' ||
                     input$Ind_sel == 'Processor characteristics'
             ) {
                 if (input$demStats == 'Mean') {
-                    max(dat$VALUE + dat$VARIANCE, na.rm = T)
+                    max(dat4plot$VALUE + dat4plot$VARIANCE, na.rm = T)
                 } else if (input$demStats == 'Median') {
-                    max(dat$q75, na.rm = T)
+                    max(dat4plot$q75, na.rm = T)
                 } else {
-                    max(dat$VALUE, na.rm = T)
+                    max(dat4plot$VALUE, na.rm = T)
                 }
             }
         }
@@ -202,17 +202,17 @@ doPlotDownload <- function(dat, x, y) {
         yaxislabel <- function() {
             if (input$LayoutSelect) {
                 if (input$Ind_sel %in% c('Economic', 'Cost')) {
-                    paste(dat$STAT, "(see plot title for units)")
+                    paste(dat4plot$STAT, "(see plot title for units)")
                 } else {
-                    paste(dat$SUMSTAT, "(see plot title for units)")
+                    paste(dat4plot$SUMSTAT, "(see plot title for units)")
                 }
             } else {
-                dat$ylab
+                dat4plot$ylab
             }
         }
 
         yr <- function() {
-            return(unique(as.numeric(dat$YEAR)))
+            return(unique(as.numeric(dat4plot$YEAR)))
         }
 
         groupVar <- "whitingv"
@@ -311,7 +311,7 @@ doPlotDownload <- function(dat, x, y) {
         source_lab <- function() {
             paste(
                 "\n
-        \nSourced from the FISHEyE application (https://dataexplorer.northwestscience.fisheries.noaa.gov/fisheye/PerformanceMetrics/) maintained by NOAA Fisheriess NWFSC on ",
+        \nSourced from the FISHEyE application (https://dataexplorer.northwestscience.fisheries.noaa.gov/fisheye/PerformanceMetrics/) maintained by NOAA Fisheries NWFSC on ",
                 format(Sys.Date(), format = "%B %d %Y")
             )
         }
@@ -323,15 +323,15 @@ doPlotDownload <- function(dat, x, y) {
         # x-axis label ####
         # xlab is actually "notes"
         xlab <- function() {
-            #   if (max(dat$conf) == 0) {
-            #     if(max(dat$flag) == 0) {
+            #   if (max(dat4plot$conf) == 0) {
+            #     if(max(dat4plot$flag) == 0) {
             #       paste(source_lab())
             #     }
             #     else {
             #       paste(supp_obs(), source_lab())
             #     }
             #   } else {
-            if (max(dat$flag) == 0) {
+            if (max(dat4plot$flag) == 0) {
                 paste(supp_obs(), source_lab())
             } else {
                 paste(supp_obs(), source_lab())
@@ -349,8 +349,8 @@ doPlotDownload <- function(dat, x, y) {
 
         # scaling factor for geom text size ####
         scale_geom_text <- function() {
-            if (any(dat$VALUE > 0, na.rm = T)) {
-                return(max(dat$VALUE, na.rm = T))
+            if (any(dat4plot$VALUE > 0, na.rm = T)) {
+                return(max(dat4plot$VALUE, na.rm = T))
             } else {
                 return(0)
             }
@@ -379,13 +379,13 @@ doPlotDownload <- function(dat, x, y) {
                         y = .data[[y]],
                         group = .data[[groupVar]]
                     ),
-                    environment = environment() +
-                        coord_cartesian(xlim = c(NA, max(2025, currentyear)))
-                )
+                    environment = environment()
+                ) +
+                    coord_cartesian(xlim = c(NA, max(2025, currentyear)))
                 # otherwise normal plot:
             } else {
-                dat <- dat[order(dat$sort), ]
-                dat$bystategrp <- paste0(dat$AGID, dat$whitingv)
+                dat4plot <- dat4plot[order(dat4plot$sort), ]
+                dat4plot$bystategrp <- paste0(dat4plot$AGID, dat4plot$whitingv)
                 g <-
                     # I think this is where the NAs are getting removed which causes lines to be connected through suppressed/missing values #removeNAs
                     ggplot(
@@ -396,10 +396,10 @@ doPlotDownload <- function(dat, x, y) {
                             group = .data[[groupVar]]
                         ),
                         environment = environment()
-                    ) #+coord_cartesian(xlim = c(0, length(table(dat$YEAR))+1))
+                    ) #+coord_cartesian(xlim = c(0, length(table(dat4plot$YEAR))+1))
             }
         } else {
-            #dat <- dat[order(dat$sort), ]
+            #dat <- dat[order(dat4plot$sort), ]
             g <-
                 # I think this is where the NAs are getting removed which causes lines to be connected through suppressed/missing values #removeNAs
                 ggplot(
@@ -410,7 +410,7 @@ doPlotDownload <- function(dat, x, y) {
                         group = .data[[groupVar]]
                     ),
                     environment = environment()
-                ) #+coord_cartesian(xlim = c(0, length(table(dat$YEAR))+1))
+                ) #+coord_cartesian(xlim = c(0, length(table(dat4plot$YEAR))+1))
         }
 
         # add lines and points to the plot ####
@@ -436,17 +436,23 @@ doPlotDownload <- function(dat, x, y) {
                         )
                 } else {
                     g <- g +
-                        geom_line(aes(colour = .data[[groupVar]]), size = 1.5) +
+                        geom_line(
+                            aes(colour = .data[[groupVar]]),
+                            linewidth = 1.5
+                        ) +
                         geom_point(aes(colour = .data[[groupVar]]), size = 4)
                 }
             } else {
                 g <- g +
-                    geom_line(aes(colour = .data[[groupVar]]), size = 1.5) +
+                    geom_line(
+                        aes(colour = .data[[groupVar]]),
+                        linewidth = 1.5
+                    ) +
                     geom_point(aes(colour = .data[[groupVar]]), size = 4)
             }
         }
         g <- g +
-            geom_line(aes(colour = .data[[groupVar]]), size = 0.75) +
+            geom_line(aes(colour = .data[[groupVar]]), linewidth = 0.75) +
             geom_point(aes(colour = .data[[groupVar]]), size = 2)
 
         #------ Add variance ------#
@@ -476,7 +482,7 @@ doPlotDownload <- function(dat, x, y) {
         geom_rect_fun <- function(ymin_val = -Inf, ymax_val = Inf) {
             geom_vline(
                 xintercept = table(yr() <= 2010)[[2]] + .5,
-                size = 1.5,
+                linewidth = 1.5,
                 color = "darkgray"
             )
         }
@@ -602,7 +608,7 @@ doPlotDownload <- function(dat, x, y) {
         }
 
         if (input$LayoutSelect) {
-            if (length(unique(dat$YEAR)) > 9) {
+            if (length(unique(dat4plot$YEAR)) > 9) {
                 xaxissize <- 6
             } else {
                 xaxissize <- 11

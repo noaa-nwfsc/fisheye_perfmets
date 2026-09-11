@@ -3,8 +3,8 @@ doPlotPrep <- reactive({
         #removeNAs
         #print(input$demStats)
         dat <- subset(DatSub(), is.na(DatSub()$VALUE) == FALSE)
-        x = 'YEAR'
-        y = 'VALUE'
+        x <- 'YEAR'
+        y <- 'VALUE'
         ##Prepping data for plotting by converting to more "plot friendly" values
 
         # Data prep functions ####
@@ -229,9 +229,9 @@ doPlotPrep <- reactive({
         g <- ggplot(
             dat4plot,
             aes(x = .data[[x]], y = .data[[y]], group = groupVar),
-            environment = environment() +
-                coord_cartesian(xlim = c(NA, max(2025, currentyear)))
-        )
+            environment = environment()
+        ) +
+            coord_cartesian(xlim = c(NA, max(2025, currentyear)))
 
         # PLOT: add lines and points to the plot ####
         if (input$Ind_sel == 'Other') {
