@@ -217,21 +217,23 @@ doPlotDownload <- function(dat, x, y) {
 
         groupVar <- "whitingv"
 
-        colourThirds <-
+        allcolourThirds <-
             c(
                 # set colors for whiting/non-whiting/all vessels
-                'Non-whiting vessels' = "#d7191c",
-                'Whiting vessels' = "#2b83ba",
+                'Non-whiting vessels' = "#E69F00",
+                'Whiting vessels' = "#0072B2",
                 'All vessels' = "#000000",
                 # set colors for whiting/non-whiting/all processors
-                'Non-whiting processors' = "#d7191c",
-                'Whiting processors' = "#2b83ba",
+                'Non-whiting processors' = "#E69F00",
+                'Whiting processors' = "#0072B2",
                 'All processors' = "#000000",
                 # set black for mothership vessels
                 'Mothership vessels' = "#000000",
                 # set black for catcher-procesor vessels
                 'Catcher-processor vessels' = "#000000"
             )
+
+        colourThirds <- allcolourThirds[unique(dat4plot$whitingv)]
 
         sect <- function() {
             if (input$Sect_sel == "CV") {
@@ -387,7 +389,7 @@ doPlotDownload <- function(dat, x, y) {
                 g <-
                     # I think this is where the NAs are getting removed which causes lines to be connected through suppressed/missing values #removeNAs
                     ggplot(
-                        dat,
+                        dat4plot,
                         aes(
                             x = .data[[x]],
                             y = .data[[y]],
@@ -401,7 +403,7 @@ doPlotDownload <- function(dat, x, y) {
             g <-
                 # I think this is where the NAs are getting removed which causes lines to be connected through suppressed/missing values #removeNAs
                 ggplot(
-                    dat,
+                    dat4plot,
                     aes(
                         x = .data[[x]],
                         y = .data[[y]],
