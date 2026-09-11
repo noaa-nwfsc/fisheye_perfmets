@@ -252,7 +252,7 @@ output$crewSelect <- renderUI({
                     checkboxGroupInput(
                         "crewSelect",
                         NULL,
-                        choiceNames = lappy(labor_cv_crew$metric_link, HTML),
+                        choiceNames = lapply(labor_cv_crew$metric_link, HTML),
                         choiceValues = labor_cv_crew$metric_value,
                         selected = "Number of crew"
                     )
