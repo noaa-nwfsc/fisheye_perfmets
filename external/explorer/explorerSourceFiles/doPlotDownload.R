@@ -424,7 +424,7 @@ doPlotDownload <- function(dat, x, y) {
                                 colour = .data[[groupVar]],
                                 group = 'bystategrp'
                             ),
-                            size = 1.5
+                            size = 2
                         ) +
                         geom_point(
                             aes_string(
@@ -432,23 +432,23 @@ doPlotDownload <- function(dat, x, y) {
                                 shape = 'AGID',
                                 group = 'bystategrp'
                             ),
-                            size = 1.5
+                            size = 2
                         )
                 } else {
                     g <- g +
                         geom_line(
                             aes(colour = .data[[groupVar]]),
-                            linewidth = 1.5
+                            linewidth = .75
                         ) +
-                        geom_point(aes(colour = .data[[groupVar]]), size = 1.5)
+                        geom_point(aes(colour = .data[[groupVar]]), size = 2)
                 }
             } else {
                 g <- g +
                     geom_line(
                         aes(colour = .data[[groupVar]]),
-                        linewidth = 1.5
+                        linewidth = .75
                     ) +
-                    geom_point(aes(colour = .data[[groupVar]]), size = 1.5)
+                    geom_point(aes(colour = .data[[groupVar]]), size = 2)
             }
         }
         g <- g +
@@ -482,7 +482,7 @@ doPlotDownload <- function(dat, x, y) {
         geom_rect_fun <- function(ymin_val = -Inf, ymax_val = Inf) {
             geom_vline(
                 xintercept = 2010.5,
-                linewidth = 1.5,
+                linewidth = .75,
                 color = "darkgray"
             )
         }
@@ -577,7 +577,6 @@ doPlotDownload <- function(dat, x, y) {
                 panel.background = element_rect(fill = "white"),
                 #panel.spacing = unit(1, "lines"),
                 panel.grid.minor = element_line(linetype = "blank"),
-                panel.grid.major.x = element_line(linetype = "blank"),
                 panel.grid.major.y = element_line(
                     color = "#656C70",
                     linetype = "dotted"
@@ -589,7 +588,14 @@ doPlotDownload <- function(dat, x, y) {
                     vjust = 1
                 ),
                 strip.background = element_rect(fill = "lightgrey"),
-                axis.ticks = element_blank(),
+                panel.grid.minor.x = element_line(
+                    color = "#E5E5E5",
+                    linewidth = 0.5
+                ),
+                panel.grid.major.x = element_line(
+                    color = "#E5E5E5",
+                    linewidth = 0.5
+                ),
                 axis.title.x = element_text(
                     size = rel(.7),
                     face = "italic",
@@ -619,7 +625,13 @@ doPlotDownload <- function(dat, x, y) {
                 ),
                 legend.title = element_blank()
             )
-
+        g <- g +
+            scale_x_continuous(
+                breaks = scales::pretty_breaks(),
+                minor_breaks = function(x) {
+                    seq(floor(min(x)), ceiling(max(x)), by = 1)
+                }
+            )
         print(g)
     }
 }
