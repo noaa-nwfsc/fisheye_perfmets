@@ -432,7 +432,7 @@ doPlotDownload <- function(dat, x, y) {
                                 shape = 'AGID',
                                 group = 'bystategrp'
                             ),
-                            size = 4
+                            size = 1.5
                         )
                 } else {
                     g <- g +
@@ -440,7 +440,7 @@ doPlotDownload <- function(dat, x, y) {
                             aes(colour = .data[[groupVar]]),
                             linewidth = 1.5
                         ) +
-                        geom_point(aes(colour = .data[[groupVar]]), size = 4)
+                        geom_point(aes(colour = .data[[groupVar]]), size = 1.5)
                 }
             } else {
                 g <- g +
@@ -448,7 +448,7 @@ doPlotDownload <- function(dat, x, y) {
                         aes(colour = .data[[groupVar]]),
                         linewidth = 1.5
                     ) +
-                    geom_point(aes(colour = .data[[groupVar]]), size = 4)
+                    geom_point(aes(colour = .data[[groupVar]]), size = 1.5)
             }
         }
         g <- g +
@@ -481,7 +481,7 @@ doPlotDownload <- function(dat, x, y) {
         # geom_rect (define the grey boxes for pre-catch shares) ####
         geom_rect_fun <- function(ymin_val = -Inf, ymax_val = Inf) {
             geom_vline(
-                xintercept = table(yr() <= 2010)[[2]] + .5,
+                xintercept = 2010.5,
                 linewidth = 1.5,
                 color = "darkgray"
             )
@@ -521,65 +521,10 @@ doPlotDownload <- function(dat, x, y) {
                                 ymin_val = structure(-Inf, class = "Date"),
                                 ymax_val = structure(Inf, class = "Date")
                             )
-                        g <- g +
-                            geom_text_fun(
-                                x_val = table(yr() <= 2010)[[2]] / 3.5,
-                                y_val = min(as.Date(
-                                    upper(),
-                                    origin = "2014-01-01"
-                                )),
-                                label_val = "Pre-catch shares"
-                            )
-                        g <- g +
-                            geom_text_fun(
-                                x_val = table(yr() <= 2010)[[2]] +
-                                    table(yr() > 2010)[[2]] / 1.5,
-                                y_val = min(as.Date(
-                                    upper(),
-                                    origin = "2014-01-01"
-                                )),
-                                label_val = "Catch shares"
-                            )
+
                         # for all other variables
                     }
-                } else {
-                    g <- g + geom_rect_fun()
-                    # geom_text1
-                    g <- g +
-                        geom_text_fun(
-                            x_val = table(yr() <= 2010)[[2]] / 3.5,
-                            y_val = max(upper()) + scale_geom_text() / 5,
-                            label_val = "Pre-catch shares"
-                        )
-                    g <- g +
-                        # geom_text3
-                        geom_text_fun(
-                            x_val = table(yr() <= 2010)[[2]] +
-                                table(yr() > 2010)[[2]] / 1.5,
-                            y_val = max(upper()) + scale_geom_text() / 5,
-                            label_val = "Catch shares"
-                        )
                 }
-            } else {
-                # Compare by metrics
-                g <- g + geom_rect_fun()
-                g <- g +
-                    # geom_text4
-                    geom_text_fun(
-                        x_val = table(yr() <= 2010)[[2]] / 3.5,
-                        y_val = Inf,
-                        label_val = "Pre-catch shares",
-                        vjust_val = 1.5
-                    )
-                g <- g +
-                    # geom_text6
-                    geom_text_fun(
-                        x_val = table(yr() <= 2010)[[2]] +
-                            table(yr() > 2010)[[2]] / 1.5,
-                        y_val = Inf,
-                        label_val = "Catch shares",
-                        vjust_val = 1.5
-                    )
             }
         } else {
             # end of rect/text for cs/non-cs, no CS box required for plots with only one "kind" of year
