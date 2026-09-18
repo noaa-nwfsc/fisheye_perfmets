@@ -214,18 +214,6 @@ function(request) {
         # source("www/shiny_framebuster/framebuster.R")$value,
         ## example R framebusting code
         appFrameHeaderScrolling(),
-        ### #-- Government Shutdown banner --- ###
-        #tags$div(class='header', #tags$syle(HTML('background-color:white;color:blue;width:auto; text-align:left;float:center;margin:0 auto; padding: 0.3em 0 0.5em;font-size:large">
-        #  tags$p("The Federal Government is closed. The site will not be updated; however NOAA websites and social media channels necessary to protect lives and property will be maintained. See", tags$a(href="https://www.weather.gov", "www.weather.gov."), "Learn more at", tags$a(href="https://noaa.gov", "NOAA.gov."))),
-        ### #-- Government Shutdown banner --- ###
-        # fluidRow(div(style = "padding-bottom: 5px;margin-bottom:0"),
-        #   tags$h2(style = "margin-left: 15px",
-        #     HTML("<div><p style='font-size:120%'><strong><a style='color:white; background-color:#1a5d99;  font-family:Cambria; border-radius:25px; padding:5px'
-        #                           href='https://connect.fisheries.noaa.gov/fisheye/fisheyelandingpage.html'> FISHEyE</a>- Performance Metrics </strong></p>
-        #                       </div>")), htmlOutput("SectPrint")
-        # ),
-
-        # fluidRow(img(src = 'header_noaa_l.png', height = 87, width = 401)),
 
         navbarPage(
             id = "page",
@@ -429,7 +417,7 @@ function(request) {
             #   )),
             tabPanel(
                 HTML(
-                    '<a class="btn btn-warning", href="https://connect.fisheries.noaa.gov/fisheye/fisheyelandingpage.html"
+                    '<a class="btn btn-warning", href="https://connect.fisheries.noaa.gov/fisheye/"
                         style="height:37px;border-radius:25px;margin: -24px -50px; float:top;position:absolute;right:-100px;
                               font-familiy: Arial, Helvetica, sans-serif;font-size: 12pt; padding-top:7px;
                         padding-bottom:10px"> FISHEyE Homepage</a>'
