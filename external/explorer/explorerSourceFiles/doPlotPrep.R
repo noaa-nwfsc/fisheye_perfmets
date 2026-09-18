@@ -240,7 +240,7 @@ doPlotPrep <- reactive({
                     g +
                     geom_line(
                         aes(colour = .data[[groupVar]], group = 'bystategrp'),
-                        size = 1.5
+                        linewidth = 1.5
                     ) +
                     geom_point(
                         aes(
@@ -253,7 +253,7 @@ doPlotPrep <- reactive({
             }
         } else {
             g <- g +
-                geom_line(aes(colour = .data[[groupVar]]), size = 1.5) +
+                geom_line(aes(colour = .data[[groupVar]]), linewidth = 1.5) +
                 geom_point(aes(colour = .data[[groupVar]]), size = 4)
         }
 

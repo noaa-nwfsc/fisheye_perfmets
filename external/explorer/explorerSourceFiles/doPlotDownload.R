@@ -39,26 +39,6 @@ doPlotDownload <- function(dat, x, y) {
         } else {
             reorder(dat4plot$ylab, dat4plot$sort)
         }
-        #
-        # dat4plot$thresh <-  if(input$Ind_sel=="Economic"){
-        #   length(unique(dat4plot$YEAR<=2010))
-        # } else if(input$Ind_sel!="Economic"){
-        #   if(input$LayoutSelect){
-        #     if(is.na(max(dat4plot$VARIANCE))) {
-        #       data.frame(dat %>%
-        #                    group_by(METRIC) %>%
-        #                    mutate(threshold=max(VALUE, na.rm=T)+max(VARIANCE, na.rm=T)+max(VALUE, na.rm=T)/10))%>%
-        #         subset(select=c(threshold))
-        #     } else {
-        #       data.frame(dat %>%
-        #                    group_by(METRIC) %>%
-        #                    mutate(threshold=max(VALUE, na.rm=T)+max(VALUE, na.rm=T)/10))%>%
-        #         subset(select=c(threshold))
-        #     }
-        #   } else {
-        #     0
-        #   }
-        #  }
 
         dat4plot$upper <-
             if (input$Ind_sel == "Economic") {
@@ -424,7 +404,7 @@ doPlotDownload <- function(dat, x, y) {
                                 colour = .data[[groupVar]],
                                 group = 'bystategrp'
                             ),
-                            size = 2
+                            linewidth = 2
                         ) +
                         geom_point(
                             aes_string(
@@ -609,7 +589,7 @@ doPlotDownload <- function(dat, x, y) {
                     colour = "grey25"
                 ),
                 axis.line.x = element_line(
-                    size = 2,
+                    linewidth = 2,
                     colour = "black",
                     linetype = "solid"
                 ),

@@ -68,23 +68,23 @@ DatVars <- reactive({
 metricstatselections <- reactive({
     # this step prevents errors from being thrown until ind_sel is populated by the app
     if (is.null(input$Ind_sel)) {
-        stat = input$demStats
-        metric = input$demSelect
+        stat <- input$demStats
+        metric <- input$demSelect
     } else if (grepl('characteristics', input$Ind_sel)) {
-        stat = input$demStats
-        metric = input$demSelect
+        stat <- input$demStats
+        metric <- input$demSelect
     } else if (input$Ind_sel == 'Impacts') {
-        stat = input$impactStats
-        metric = input$impactSelect
+        stat <- input$impactStats
+        metric <- input$impactSelect
     } else if (input$Ind_sel == 'Economic') {
-        stat = input$econStats
-        metric = input$econSelect
+        stat <- input$econStats
+        metric <- input$econSelect
     } else if (input$Ind_sel == 'Labor') {
-        stat = input$crewStats
-        metric = input$crewSelect
+        stat <- input$crewStats
+        metric <- input$crewSelect
     } else if (input$Ind_sel == 'Cost') {
-        stat = input$costStats
-        metric = input$costSelect
+        stat <- input$costStats
+        metric <- input$costSelect
     } else if (input$Ind_sel == 'Other') {
         if (
             any(
@@ -96,15 +96,15 @@ metricstatselections <- reactive({
                     )
             )
         ) {
-            stat = ''
-            metric = input$otherSelect
+            stat <- ''
+            metric <- input$otherSelect
         } else {
-            stat = input$otherStats
-            metric = input$otherSelect
+            stat <- input$otherStats
+            metric <- input$otherSelect
         }
     } else {
-        stat = ''
-        metric = ''
+        stat <- ''
+        metric <- ''
     }
 
     return(list(stat = stat, metric = metric))
@@ -169,7 +169,7 @@ DatSubRaw <- reactive({
         start_yr <- input$YearSelect[1]
     }
     if (is.null(input$YearSelect[2])) {
-        end_yr <- currentyear
+        end_yr <- max(dat$YEAR, na.rm = TRUE)
     } else {
         end_yr <- input$YearSelect[2]
     }
@@ -247,7 +247,7 @@ DatSubTable <- reactive({
         )
         dollar <- ifelse(grepl('$', datSub$ylab, fixed = T), '$', '')
 
-        val = formatC(x, format = 'f', dig = rounding, big.mark = ',')
+        val <- formatC(x, format = 'f', dig = rounding, big.mark = ',')
 
         return(val)
     }
@@ -308,9 +308,9 @@ DatSubTable <- reactive({
                 c('Number of vessels', 'Number of processors')
         )
     ) {
-        sometimesexclude = 'Total'
+        sometimesexclude <- 'Total'
     } else {
-        sometimesexclude = NULL
+        sometimesexclude <- NULL
     }
 
     alwaysexclude <- c(
@@ -530,7 +530,7 @@ output$resetButton <- renderUI({
     }
 })
 
-vars2 = reactiveValues(counter = 0.5)
+vars2 <- reactiveValues(counter = 0.5)
 output$DataButton2 <- renderUI({
     if (PermitPlot()) {
         actionButton("data2", label = label2())
@@ -544,7 +544,7 @@ output$DataButton2 <- renderUI({
 #    values$shouldShow = TRUE
 #})
 
-vars3 = reactiveValues(counter = 0.5)
+vars3 <- reactiveValues(counter = 0.5)
 observeEvent(input$hideshow1, {
     toggle("PlotMain2")
     #  hide('CaseStudyFig2')
@@ -553,7 +553,7 @@ observeEvent(input$hideshow1, {
     #    vars3$counter <- vars3$counter + .5
     #  })
 })
-vars4 = reactiveValues(counter = 0.5)
+vars4 <- reactiveValues(counter = 0.5)
 observeEvent(input$hideshow2, {
     toggle('CaseStudyFig2')
     #  hide('PlotMain2')
