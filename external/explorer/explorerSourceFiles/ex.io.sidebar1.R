@@ -830,7 +830,7 @@ output$deflYearselect <- renderUI({
         c("2024" = 2024, "2023" = 2023, "2022" = 2022)
     )
 
-    if (input$Ind_sel %in% c('Labor', 'Cost', 'Impacts', 'Economic')) {
+    if (isTRUE(input$Ind_sel %in% c('Labor', 'Cost', 'Impacts', 'Economic'))) {
         defl_select
     }
 })

@@ -350,7 +350,10 @@ doPlot <- function(dat, x, y, currentyear) {
                     environment = environment()
                 )
                 g <- g +
-                    geom_line(aes(colour = .data[[groupVar]]), size = .75) +
+                    geom_line(
+                        aes(colour = .data[[groupVar]]),
+                        linewidth = .75
+                    ) +
                     geom_point(aes(colour = .data[[groupVar]]), size = 4)
                 # otherwise normal plot:
             } else {
